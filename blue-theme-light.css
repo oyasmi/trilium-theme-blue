@@ -76,6 +76,34 @@ body {
     --blue-heading-6-color: #565e64;
     --blue-selection-background: #c9dfed;
     --blue-selection-text: #193b53;
+    --blue-code-background: #edf1f3;
+    --blue-code-text: #283c49;
+    --blue-code-border: #bacbd5;
+    --blue-code-accent: #6c91ac;
+    --blue-code-label-background: #dce7ee;
+    --blue-code-label-text: #35566e;
+    --blue-syntax-comment: #586d7b;
+    --blue-syntax-keyword: #684d86;
+    --blue-syntax-string: #30634e;
+    --blue-syntax-number: #86542c;
+    --blue-syntax-title: #285f88;
+    --blue-syntax-variable: #77542e;
+    --blue-syntax-meta: #52657b;
+    --blue-syntax-deletion: #9b4146;
+    --blue-syntax-addition-background: #e0ebe2;
+    --blue-syntax-deletion-background: #f3e2e0;
+    --blue-inline-code-background: #e3e9e6;
+    --blue-inline-code-text: #31566e;
+    --blue-table-background: #f8f7ec;
+    --blue-table-stripe: #eff2eb;
+    --blue-table-header-background: #e0e9ec;
+    --blue-table-header-text: #294f68;
+    --blue-table-border: #c1cfd0;
+    --blue-table-divider: #d7dfda;
+    --blue-table-hover: #e5edf0;
+    --blue-table-focus: #d7e7f1;
+    --blue-table-selection: #88b8df66;
+    --blue-caption-text: #556b70;
     --left-pane-item-selected-shadow: inset 3px 0 var(--blue-tree-active-border);
 }
 
@@ -280,11 +308,200 @@ body.heading-style-markdown :is(.note-detail-editable-text, .note-detail-readonl
     text-underline-offset: 0.18em;
 }
 
-:is(.note-detail-editable-text, .note-detail-readonly-text) pre:not(:where(.note-list-widget *)) {
-    line-height: 1.6;
+/* Text-note code blocks; native widget controls remain outside the scroll area. */
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre:has(> code):not(:where(.note-list-widget *, .mermaid, .layout-table *)) {
+    position: relative;
+    margin-block: 1.15em !important; /* Next's code-card margin is also important. */
+    padding: 0;
+    min-width: 0;
+    max-width: 100%;
+    border: 1px solid var(--blue-code-border);
+    border-block-start: 2px solid var(--blue-code-accent);
+    border-radius: 6px;
+    background: var(--blue-code-background);
+    color: var(--blue-code-text) !important; /* Trilium's pre:not(.hljs) is important. */
+    box-shadow: none;
+    font-family: var(--monospace-font-family);
+    font-size: var(--monospace-font-size);
+    line-height: 1.65;
     text-indent: 0;
     text-align: start;
+    tab-size: 4;
+    --copy-button-margin-size: 0.4em;
 }
+
+/* Scroll code, not pre: clipping pre hides CKEditor's insertion handles. */
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .mermaid, .layout-table *)) > code {
+    display: block;
+    padding: 1em 1.2em;
+    border: 0;
+    border-radius: 0 0 5px 5px;
+    background: transparent;
+    color: inherit;
+    box-shadow: none;
+    font: inherit;
+    overflow: auto;
+    overflow-wrap: normal;
+    word-break: normal;
+    --scrollbar-thumb-color: var(--blue-code-accent);
+    --scrollbar-thumb-hover-color: var(--blue-code-text);
+}
+
+/* Keep Trilium's word-wrap preference, including long terminal commands. */
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text):not(.word-wrap) pre > code:not(:where(.note-list-widget *, .layout-table *)) { white-space: pre; }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text).word-wrap pre > code:not(:where(.note-list-widget *, .layout-table *)) {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre[data-language]:not(:where(.note-list-widget *, .layout-table *)) > code {
+    padding-block-start: 2.65em;
+}
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre[data-language]:not(:where(.note-list-widget *, .layout-table *))::after {
+    content: attr(data-language);
+    position: absolute;
+    inset-block-start: 0.5em;
+    inset-inline: auto 0.85em;
+    max-width: calc(100% - 1.7em);
+    padding: 0.15em 0.65em;
+    border-radius: 4px;
+    background: var(--blue-code-label-background);
+    color: var(--blue-code-label-text);
+    font-family: var(--monospace-font-family);
+    font-size: 0.75em;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
+}
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre:has(> button.copy-button):not(:where(.note-list-widget *)) { padding-inline-end: 0; }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre:has(> button.copy-button):not(:where(.note-list-widget *)) > code { padding-inline-end: 3.25em; }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre > button.copy-button:not(:where(.note-list-widget *)) {
+    color: var(--blue-code-label-text);
+    background: var(--blue-code-label-background);
+    border: 1px solid var(--blue-code-border);
+    border-radius: 4px;
+    opacity: 1;
+}
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre > button.copy-button:focus-visible {
+    outline: 2px solid var(--input-focus-outline-color);
+    outline-offset: 2px;
+}
+
+/* Inline code belongs to prose and must not add padding inside a code block. */
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) :not(pre) > code:not(:where(pre *, .note-list-widget *, .layout-table *)) {
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+    background: var(--blue-inline-code-background);
+    color: var(--blue-inline-code-text);
+    font-family: var(--monospace-font-family);
+    font-size: 0.85em;
+    overflow-wrap: anywhere;
+}
+
+/* Syntax roles are scoped to text notes, leaving code notes and app chrome alone. */
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) :is(.hljs, .hljs-subst, .hljs-operator, .hljs-punctuation) { color: var(--blue-code-text); background: transparent; }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) :is(.hljs-comment, .hljs-quote, .hljs-code) { color: var(--blue-syntax-comment); font-style: normal; }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) :is(.hljs-keyword, .hljs-selector-tag, .hljs-literal, .hljs-doctag, .hljs-type) { color: var(--blue-syntax-keyword); }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) :is(.hljs-string, .hljs-regexp, .hljs-selector-attr, .hljs-selector-pseudo) { color: var(--blue-syntax-string); }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) :is(.hljs-number, .hljs-symbol, .hljs-bullet) { color: var(--blue-syntax-number); }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) :is(.hljs-title, .hljs-section, .hljs-built_in, .hljs-name, .hljs-selector-id, .hljs-selector-class) { color: var(--blue-syntax-title); }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) :is(.hljs-variable, .hljs-template-variable, .hljs-attr, .hljs-attribute, .hljs-params) { color: var(--blue-syntax-variable); }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) :is(.hljs-meta, .hljs-tag) { color: var(--blue-syntax-meta); }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) .hljs-addition { color: var(--blue-syntax-string); background: var(--blue-syntax-addition-background); }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) .hljs-deletion { color: var(--blue-syntax-deletion); background: var(--blue-syntax-deletion-background); }
+
+
+/* Preserve table semantics, authored widths/colors, and editor widget outlines. */
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) figure.table:not(:where(.note-list-widget *, .layout-table, :has(> table.layout-table))) {
+    max-width: 100%;
+    margin-block: 1.15em;
+    --ck-color-table-focused-cell-background: var(--blue-table-focus);
+    --ck-color-selector-focused-cell-background: var(--blue-table-focus);
+    --ck-table-selected-cell-background: var(--blue-table-selection);
+    --ck-color-selector-cell-selection: var(--blue-table-selection);
+    --ck-color-focus-border: var(--input-focus-outline-color);
+}
+
+/* Editing figures stay unclipped so column resize and widget handles remain usable. */
+.note-detail-readonly-text figure.table:not(:where(.note-list-widget *, :has(> table.layout-table))) {
+    overflow-x: auto;
+}
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) {
+    width: 100%;
+    border: 1px solid var(--blue-table-border);
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 6px;
+    background: var(--blue-table-background);
+    color: var(--main-text-color);
+    font-size: 0.95em;
+    line-height: 1.6;
+    font-variant-numeric: tabular-nums;
+    text-indent: 0;
+}
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > :is(thead, tbody, tfoot) > tr > :is(td, th) {
+    padding: 0.65em 0.9em;
+    border: 0;
+    border-block-end: 1px solid var(--blue-table-divider);
+    border-inline-end: 1px solid var(--blue-table-divider);
+    color: var(--main-text-color);
+    background-color: var(--blue-table-background);
+    box-shadow: none;
+    vertical-align: top;
+    overflow-wrap: anywhere;
+}
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > tbody > tr:nth-child(even) > td { background-color: var(--blue-table-stripe); }
+
+/* Only semantic headers receive header styling; a plain first row remains data. */
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > :is(thead, tbody, tfoot) > tr > th {
+    background-color: var(--blue-table-header-background);
+    color: var(--blue-table-header-text);
+    font-weight: 600;
+    border-block-end-color: var(--blue-table-border);
+}
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > :is(thead, tbody, tfoot) > tr > :last-child { border-inline-end-width: 0; }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > :last-child > tr:last-child > :is(td, th) { border-block-end-width: 0; }
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) :is(td, th):not(:where(.note-list-widget *, .layout-table *)) > p:first-child { margin-block-start: 0; }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) :is(td, th):not(:where(.note-list-widget *, .layout-table *)) > p:last-child { margin-block-end: 0; }
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) figure.table:not(:where(.note-list-widget *, :has(> table.layout-table))) > figcaption {
+    padding: 0.6em 0.85em;
+    background: transparent;
+    color: var(--blue-caption-text);
+    font-size: 0.85em;
+    line-height: 1.6;
+    text-align: start;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > tbody > tr:hover > td:not(.ck-editor__editable_selected):not(.ck-editor__nested-editable_focused):not(:focus) {
+        background-color: var(--blue-table-hover);
+    }
+}
+
+/* Keep the active cell distinct from row hover and the multi-cell selection overlay. */
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > :is(thead, tbody, tfoot) > tr > :is(td, th):not(.ck-editor__editable_selected):is(.ck-editor__nested-editable_focused, :focus) {
+    background-color: var(--blue-table-focus);
+    outline: 2px solid var(--input-focus-outline-color);
+    outline-offset: -2px;
+}
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > :first-child > tr:first-child > :first-child { border-start-start-radius: 5px; }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > :first-child > tr:first-child > :last-child { border-start-end-radius: 5px; }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > :last-child > tr:last-child > :first-child { border-end-start-radius: 5px; }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > :last-child > tr:last-child > :last-child { border-end-end-radius: 5px; }
 
 /* Variables also let code blocks provide their own scrollbar colors. */
 ::-webkit-scrollbar-thumb {
@@ -336,8 +553,8 @@ body.heading-style-markdown :is(.note-detail-editable-text, .note-detail-readonl
 }
 
 .note-detail pre.hljs { box-shadow: none; }
-.ck.ck-editor__editable .ck-code_selected { background-color: hsl(0 0% 78% / 30%); }
-.note-detail :is(.attachment-content-wrapper pre code, .ck-content pre code, .ck-mermaid__editing-view) {
+.ck.ck-editor__editable .ck-code_selected { background-color: var(--blue-selection-background); }
+.note-detail :is(.attachment-content-wrapper pre code, .ck-mermaid__editing-view) {
     padding-block: 0.5em;
 }
 
@@ -392,6 +609,40 @@ body.zen .title-row { background: var(--left-pane-background-color); }
     :is(.note-detail-editable-text, .note-detail-readonly-text) a[href] {
         color: #000;
     }
+
+
+    /* Print without colored paper, clipped code or split table rows. */
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre:has(> code):not(:where(.note-list-widget *, .layout-table *)) {
+        background: #fff !important;
+        color: #000 !important;
+        border: 1px solid #999;
+        box-shadow: none;
+    }
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre > code:not(:where(.note-list-widget *, .layout-table *)) {
+        padding: 0.8em !important;
+        white-space: pre-wrap !important;
+        overflow-wrap: anywhere !important;
+        overflow: visible;
+    }
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre[data-language]::after,
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre > button.copy-button,
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) .ck-code-block__type-around,
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) .ck-widget__selection-handle,
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) .ck-widget__type-around { display: none; }
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre [class*='hljs-'] { color: #000 !important; background: transparent !important; }
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) :not(pre) > code:not(:where(pre *, .note-list-widget *)) { color: #000 !important; background: transparent !important; }
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) figure.table { overflow: visible; }
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) { border-color: #999; background: #fff; }
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > :is(thead, tbody, tfoot) > tr > :is(td, th) {
+        color: #000 !important;
+        background: transparent !important;
+        border-color: #bbb;
+        outline: none !important;
+    }
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > :is(thead, tbody, tfoot) > tr { break-inside: avoid; }
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) figure.table > figcaption { color: #333; }
+
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) .ck-editor__editable_selected::after { display: none; }
 
     #left-pane.component { background-image: none; }
 }
