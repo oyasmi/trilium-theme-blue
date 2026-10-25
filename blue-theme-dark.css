@@ -11,6 +11,20 @@ body {
   --second-border-color: #595959 !important;
   --bs-border-color: #333333 !important;
   --gutter-color: #222;
+
+  /* 设置字体 */
+  --main-font-family: 'LXGW WenKai',sans-serif;
+  --main-font-size: 1.1em;
+
+  --tree-font-family: 'LXGW WenKai',sans-serif;
+  --tree-font-size: 1.1em;
+
+  --detail-font-family: 'LXGW WenKai',sans-serif;
+  --detail-font-size: 1.1em;
+
+  --monospace-font-family: 'LXGW WenKai Mono';
+  --monospace-font-size: 1.1em;
+
     /*selection unfocus*/
   --accented-background-color: rgb(50,50,50) !important;
   /*rgb(51, 51, 51);*/
@@ -91,6 +105,11 @@ body {
     --inactive-tab-text-color: #7c7c7c;
     
     --launcher-pane-vert-icon-size: 130%;
+}
+
+/*left panel wallpaper*/
+#left-pane.component {
+  background-image: url("../../../custom/background.png");
 }
 
 body ::-webkit-calendar-picker-indicator {

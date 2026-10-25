@@ -3,13 +3,25 @@ Blue theme
 https://github.com/SiriusXT/trilium-theme-blue
 Version:0.16 for trilium-NEXT:>=0.101.1
 */
-
 body {
     --theme-style: light;        
-    --main-background-color: #fcfcfc !important;
+    --main-background-color: #f2eecb !important;
     --main-text-color: #000 !important;
-    --main-border-color: #e0e6ee !important; /*ced4da e8ecf3*/
+    --main-border-color: #ced4da !important; /*ced4da e8ecf3*/
   	--alert-bar-background: #f2f2f2 !important;
+
+    /* 设置字体 */
+    --main-font-family: 'LXGW WenKai',sans-serif;
+    --main-font-size: 1.1em;
+
+    --tree-font-family: 'LXGW WenKai',sans-serif;
+    --tree-font-size: 1.1em;
+
+    --detail-font-family: 'LXGW WenKai',sans-serif;
+    --detail-font-size: 1.1em;
+
+    --monospace-font-family: 'LXGW WenKai Mono';
+    --monospace-font-size: 1.1em;
   
     --primary-button-background-color: #4682B4 !important;
     --primary-button-border-color: transparent !important;
@@ -68,10 +80,10 @@ body {
     --launcher-pane-vert-icon-size: 130%;
   }
 
-/*left panel wallpaper
+/*left panel wallpaper*/
 #left-pane.component {
     background-image: url("../../../custom/background.png");
-}*/
+}
 
 
 .tree-actions button.tree-floating-button{
