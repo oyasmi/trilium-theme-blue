@@ -1,248 +1,193 @@
 /*
-Dark-mode-img-color-conversion.js version:0.10 for trilium:>0.58.4
-https://github.com/SiriusXT/trilium-theme-blue/blob/main/Dark-mode-img-color-conversion.js.
-You can add the #disableAdjustImage tag to the note if you don’t want the color of a certain note image to be inverted.
+Optional Trilium widget: adapt white-background diagrams in dark themes.
+Based on https://github.com/SiriusXT/trilium-theme-blue
+Add #widget to this JavaScript note and #disableAdjustImage to opt a note out.
+Images stay visible while loading; non-matching and unreadable images keep their colors.
 */
 
+const autoAdjustImage = true;
+const autoAdjustColor = true;
+const STYLE_ID = 'blue-theme-dark-content-adjustments';
+const MODE_ATTRIBUTE = 'data-blue-image-adjustment';
+const DISABLE_ATTRIBUTE = 'data-blue-disable-images';
 
-let autoAdjustImage = true;
-let autoAdjustColor = true;
+// Match editor-produced HSL and browser-normalized RGB style attributes.
+const highlightColors = [
+    ['hsl(0,0%,0%)', 'rgb(0,0,0)', '0, 0, 0'],
+    ['hsl(0,0%,30%)', 'rgb(77,77,77)', '77, 77, 77'],
+    ['hsl(0,0%,60%)', 'rgb(153,153,153)', '153, 153, 153'],
+    ['hsl(0,0%,90%)', 'rgb(230,230,230)', '230, 230, 230'],
+    ['hsl(0,0%,100%)', 'rgb(255,255,255)', '255, 255, 255'],
+    ['hsl(0,75%,60%)', 'rgb(230,76,76)', '230, 76, 76'],
+    ['hsl(30,75%,60%)', 'rgb(230,153,76)', '230, 153, 76'],
+    ['hsl(60,75%,60%)', 'rgb(230,230,76)', '230, 230, 76'],
+    ['hsl(90,75%,60%)', 'rgb(153,230,76)', '153, 230, 76'],
+    ['hsl(120,75%,60%)', 'rgb(76,230,76)', '76, 230, 76'],
+    ['hsl(150,75%,60%)', 'rgb(76,230,153)', '76, 230, 153'],
+    ['hsl(180,75%,60%)', 'rgb(76,230,230)', '76, 230, 230'],
+    ['hsl(210,75%,60%)', 'rgb(76,153,230)', '76, 153, 230'],
+    ['hsl(240,75%,60%)', 'rgb(76,76,230)', '76, 76, 230'],
+    ['hsl(270,75%,60%)', 'rgb(153,76,230)', '153, 76, 230']
+];
 
-//--------------------------------------------------------------------------------------
-// Get the value of the CSS custom property "--theme-style" of the document element and assign it to the variable "themeStyle"
-var themeStyle = getComputedStyle(document.documentElement).getPropertyValue('--theme-style');
-
-const adjustImgCss = `
-    .scrolling-container img.imgInversion{
-      filter: invert(88%) hue-rotate(180deg);
+const highlightCss = highlightColors.map(([hsl, rgb, output]) => {
+    const swatch = document.createElement('span');
+    swatch.style.backgroundColor = hsl;
+    const normalized = swatch.style.backgroundColor;
+    const values = new Set([hsl, rgb, hsl.replaceAll(',', ', '), rgb.replaceAll(',', ', '),
+        normalized, normalized.replaceAll(', ', ',')]);
+    if (hsl === 'hsl(60,75%,60%)') {
+        for (const value of ['yellow', 'rgb(255,255,0)', 'rgb(255, 255, 0)']) values.add(value);
     }
-    .scrolling-container img:not(.imgInversion):not(.imgNotInversion) {
-       opacity: 0.05;
-       brightness(10%);
-    }
-    .scrolling-container img.imgInversion {
-       opacity: 1;
-    }
-    .scrolling-container img.imgNotInversion {
-       opacity: 1;
-       filter: brightness(90%);
-    }
-    .scrolling-container img.imgNotInversionImportant {
-      opacity: 1 !important;
-      filter: invert(0) hue-rotate(0deg) !important;
-    }    
-    `
-const adjustColorCss = `
-span[style*="background-color:hsl(0,0%,0%)"],
-span[style*="background-color:hsl(0, 0%, 0%)"] {
-    background-color: rgba(0, 0, 0, 0.3) !important;
-}
+    const selectors = [...values].flatMap(value => ['', ' '].flatMap(space => [
+        `[${MODE_ATTRIBUTE}="dark"] span[style*="background-color:${space}${value};"]`,
+        `[${MODE_ATTRIBUTE}="dark"] span[style$="background-color:${space}${value}"]`
+    ]));
+    return `${selectors.join(',\n')} { background-color: rgba(${output}, 0.3) !important; }`;
+}).join('\n');
 
-span[style*="background-color:hsl(0,0%,30%)"],
-span[style*="background-color:hsl(0, 0%, 30%)"] {
-    background-color: rgba(77, 77, 77, 0.3) !important;
+let style = document.getElementById(STYLE_ID);
+if (!style) {
+    style = document.createElement('style');
+    style.id = STYLE_ID;
+    document.head.appendChild(style);
 }
+style.textContent = `@media screen {
+    ${autoAdjustImage ? `[${MODE_ATTRIBUTE}="dark"]:not([${DISABLE_ATTRIBUTE}]) img.imgInversion {
+        filter: invert(88%) hue-rotate(180deg);
+    }` : ''}
+    ${autoAdjustColor ? highlightCss : ''}
+}`;
 
-span[style*="background-color:hsl(0,0%,60%)"],
-span[style*="background-color:hsl(0, 0%, 60%)"] {
-    background-color: rgba(153, 153, 153, 0.3) !important;
-}
+module.exports = class BlueThemeDarkContent extends api.NoteContextAwareWidget {
+    get position() { return 100; }
+    static get parentWidget() { return 'note-detail-pane'; }
 
-span[style*="background-color:hsl(0,0%,90%)"],
-span[style*="background-color:hsl(0, 0%, 90%)"] {
-    background-color: rgba(230, 230, 230, 0.3) !important;
-}
-
-span[style*="background-color:hsl(0,0%,100%)"],
-span[style*="background-color:hsl(0, 0%, 100%)"] {
-    background-color: rgba(255, 255, 255, 0.3) !important;
-}
-
-span[style*="background-color:hsl(0,75%,60%)"],
-span[style*="background-color:hsl(0, 75%, 60%)"] {
-    background-color: rgba(230, 76, 76, 0.3) !important;
-}
-
-span[style*="background-color:hsl(30,75%,60%)"],
-span[style*="background-color:hsl(30, 75%, 60%)"] {
-    background-color: rgba(230, 153, 76, 0.3) !important;
-}
-
-span[style*="background-color:hsl(60,75%,60%)"],
-span[style*="background-color:hsl(60, 75%, 60%)"],
-span[style*="background-color:yellow"] {
-    background-color: rgba(230, 230, 76, 0.3) !important;
-}
-
-span[style*="background-color:hsl(90,75%,60%)"],
-span[style*="background-color:hsl(90, 75%, 60%)"] {
-    background-color: rgba(153, 230, 76, 0.3) !important;
-}
-
-span[style*="background-color:hsl(120,75%,60%)"],
-span[style*="background-color:hsl(120, 75%, 60%)"] {
-    background-color: rgba(76, 230, 76, 0.3) !important;
-}
-
-span[style*="background-color:hsl(150,75%,60%)"],
-span[style*="background-color:hsl(150, 75%, 60%)"] {
-    background-color: rgba(76, 230, 153, 0.3) !important;
-}
-
-span[style*="background-color:hsl(180,75%,60%)"],
-span[style*="background-color:hsl(180, 75%, 60%)"] {
-    background-color: rgba(76, 230, 230, 0.3) !important;
-}
-
-span[style*="background-color:hsl(210,75%,60%)"],
-span[style*="background-color:hsl(210, 75%, 60%)"] {
-    background-color: rgba(76, 153, 230, 0.3) !important;
-}
-
-span[style*="background-color:hsl(240,75%,60%)"],
-span[style*="background-color:hsl(240, 75%, 60%)"] {
-    background-color: rgba(76, 76, 230, 0.3) !important;
-}
-
-span[style*="background-color:hsl(270,75%,60%)"],
-span[style*="background-color:hsl(270, 75%, 60%)"] {
-    background-color: rgba(153, 76, 230, 0.3) !important;
-}
-`
-let styles = ''
-// Prevent bright themes from displaying images
-if (themeStyle.indexOf('dark') >= 0 && themeStyle.indexOf('light') < 0 && autoAdjustImage) {
-    styles += adjustImgCss;
-}
-
-if (autoAdjustColor) {
-    styles += adjustColorCss;
-}
-
-if (!autoAdjustImage && !autoAdjustColor) {
-    return;
-}
-let style = document.createElement('style');
-style.innerHTML = styles;
-document.head.appendChild(style);
-
-if (themeStyle.indexOf('dark') < 0) return;
-
-let autoAdjustTheme = class extends api.NoteContextAwareWidget {
-    get position() {
-        return 100;
-    }
-    static get parentWidget() {
-        return 'note-detail-pane';
-    }
-    constructor() {
-        super();
-    }
-    isEnabled() {
-        return super.isEnabled();
-        // && this.note.type === 'text';
-    }
     doRender() {
-        this.$widget = $('');
+        this.$widget = $('<span hidden aria-hidden="true"></span>');
         return this.$widget;
     }
 
     async refreshWithNote(note) {
-        const $noteSplit = $(`.note-split[data-ntx-id="${this.noteContext.ntxId}"]`);
-        this.$scrollingContainer = $noteSplit.children('.scrolling-container');
-        this.disableAdjustImage = note.isLabelTruthy("disableAdjustImage");
+        this.disconnect();
+        if (!note || (!autoAdjustImage && !autoAdjustColor)) return;
+        const split = document.querySelector(`.note-split[data-ntx-id="${CSS.escape(String(this.noteContext.ntxId))}"]`);
+        if (!split) return;
 
-        setTimeout(() => {
-            const $imgs = this.$scrollingContainer.find("img");
-            if ($imgs.length === 0) {
-                return;
-            }
-            this.currentTime = 1;
-            this.adjustImage(this.currentTime, $imgs);
-        }, 100);
-        setTimeout(() => {
-            const $imgs = this.$scrollingContainer.find("img");
-            if ($imgs.length === 0) {
-                return;
-            }
-            this.currentTime = 2;
-            this.adjustImage(this.currentTime, $imgs);
-        }, 1000);
-        setTimeout(() => {
-            const $imgs = this.$scrollingContainer.find("img");
-            if ($imgs.length === 0) {
-                return;
-            }
-            this.currentTime = 3;
-            this.adjustImage(this.currentTime, $imgs);
-        }, 3000);
-    }
+        this.container = split.querySelector('.scrolling-container') || split;
+        this.disableAdjustImage = note.isLabelTruthy('disableAdjustImage');
+        this.imageSources = new WeakMap();
+        this.onImageLoad = event => {
+            if (event.target instanceof HTMLImageElement) this.adjustImage(event.target);
+        };
+        this.container.addEventListener('load', this.onImageLoad, true);
+        this.container.addEventListener('error', this.onImageLoad, true);
 
-    async adjustImage(currentTime, $imgs) {
-        let countExecutions = 0;
-        const maxExecutions = 60; // If your internet speed is too slow, the image may take a long time to load, so try for a long time.
-        const scaleFactor = 0.4;
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d', { willReadFrequently: true });
-        const interval = setInterval(() => {
-            let uncompleteImgCount = 0;
-            countExecutions++;
-
-            // Process all img >>>
-            for (const img of $imgs) {
-                if (this.disableAdjustImage) {
-                    img.classList.add('imgNotInversionImportant');
-                    continue;
-                } else {
-                    img.classList.remove('imgNotInversionImportant');
-                }
-                if (img.classList.contains('imgInversion') || img.classList.contains('imgNotInversion')) {
-                    continue;
-                }
-                if (img.complete) {
-                    try {
-                        canvas.width = img.width * scaleFactor;
-                        canvas.height = img.height * scaleFactor;
-                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-
-                        let whiteCount = 0; // Record the number of white points
-                        for (let i = 0; i < imageData.length; i += 4) {
-                            if (imageData[i] > 200 && imageData[i + 1] > 200 && imageData[i + 2] > 200) whiteCount += 1;
-                        }
-                        if (whiteCount / (imageData.length / 4) > 0.7) {
-                            img.classList.add('imgInversion');
-                        } else {
-                            img.classList.add('imgNotInversion');
-                        }
-                    } catch (error) {
-                        if (img.src.indexOf('drawio.svg') > 0) {
-                            img.classList.add('imgInversion');
-                        }else{
-                        	img.classList.add('imgNotInversion');
-                        }
-                        console.log('Widget: autoAdjustTheme => ', error);
+        this.imageObserver = new MutationObserver(records => {
+            for (const record of records) {
+                if (record.type === 'attributes') {
+                    if (record.target instanceof HTMLImageElement) {
+                        this.imageSources.delete(record.target);
+                        record.target.classList.remove('imgInversion', 'imgNotInversion');
+                        this.adjustImage(record.target);
+                    } else if (record.target.tagName === 'SOURCE') {
+                        this.scanImages(record.target.closest('picture'));
                     }
                 } else {
-                    uncompleteImgCount++;
+                    for (const node of record.addedNodes) {
+                        if (node.nodeType === Node.ELEMENT_NODE) this.scanImages(node);
+                    }
                 }
             }
-            // Process all img <<<
-            if (uncompleteImgCount == 0 || countExecutions >= maxExecutions || currentTime < this.currentTime) {
-                clearInterval(interval);
-            }
-        }, 1000);
+        });
+        this.imageObserver.observe(this.container, {
+            childList: true, subtree: true, attributes: true,
+            attributeFilter: ['src', 'srcset', 'sizes']
+        });
 
+        // Trilium can switch themes without reloading; watch both theme roots.
+        this.themeObserver = new MutationObserver(() => this.updateMode());
+        for (const element of [document.body, document.documentElement]) {
+            this.themeObserver.observe(element, {
+                attributes: true, attributeFilter: ['class', 'style', 'data-theme-id']
+            });
+        }
+        this.updateMode();
+    }
+
+    updateMode() {
+        if (!this.container) return;
+        const theme = getComputedStyle(document.body).getPropertyValue('--theme-style').trim();
+        this.dark = theme === 'dark';
+        if (this.dark) this.container.setAttribute(MODE_ATTRIBUTE, 'dark');
+        else this.container.removeAttribute(MODE_ATTRIBUTE);
+        this.container.toggleAttribute(DISABLE_ATTRIBUTE, this.disableAdjustImage || !autoAdjustImage);
+        if (this.dark && autoAdjustImage && !this.disableAdjustImage) this.scanImages(this.container);
+    }
+
+    scanImages(root) {
+        if (!root || !this.dark || !autoAdjustImage || this.disableAdjustImage) return;
+        if (root instanceof HTMLImageElement) this.adjustImage(root);
+        root.querySelectorAll('img').forEach(img => this.adjustImage(img));
+    }
+
+    adjustImage(img) {
+        if (!this.dark || !autoAdjustImage || this.disableAdjustImage || !this.container?.contains(img)) return;
+        if (!img.complete) return; // A captured load/error event will retry it.
+        const source = img.currentSrc || img.src;
+        if (this.imageSources.get(img) === source) return;
+        img.classList.remove('imgInversion', 'imgNotInversion');
+
+        let invert = false;
+        if (img.naturalWidth && img.naturalHeight) {
+            try {
+                // Bound sampling to 4096 pixels even for very large images.
+                const canvas = document.createElement('canvas');
+                const scale = Math.min(1, 64 / Math.max(img.naturalWidth, img.naturalHeight));
+                canvas.width = Math.max(1, Math.round(img.naturalWidth * scale));
+                canvas.height = Math.max(1, Math.round(img.naturalHeight * scale));
+                const ctx = canvas.getContext('2d', { willReadFrequently: true });
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+                let white = 0;
+                for (let i = 0; i < pixels.length; i += 4) {
+                    if (pixels[i + 3] > 230 && pixels[i] > 200 && pixels[i + 1] > 200 && pixels[i + 2] > 200) white++;
+                }
+                // Transparent white artwork is not an opaque white page.
+                invert = white / (pixels.length / 4) > 0.7;
+            } catch {
+                // Cross-origin, unsupported and broken images remain visible.
+            }
+        }
+        img.classList.add(invert ? 'imgInversion' : 'imgNotInversion');
+        this.imageSources.set(img, source);
+    }
+
+    disconnect() {
+        this.imageObserver?.disconnect();
+        this.themeObserver?.disconnect();
+        if (this.container) {
+            this.container.removeEventListener('load', this.onImageLoad, true);
+            this.container.removeEventListener('error', this.onImageLoad, true);
+            this.container.removeAttribute(MODE_ATTRIBUTE);
+            this.container.removeAttribute(DISABLE_ATTRIBUTE);
+        }
+        this.container = null;
+    }
+
+    cleanup() {
+        this.disconnect();
+        super.cleanup();
+    }
+
+    remove() {
+        this.disconnect();
+        super.remove();
     }
 
     async entitiesReloadedEvent({ loadResults }) {
-        if (loadResults.isNoteContentReloaded(this.noteId)) {
-            await this.refresh();
-        } else if (loadResults.getAttributeRows().find(attr => attr.type === 'label' && attr.noteId === this.noteId)) {
-            await this.refresh();
-        }
+        if (loadResults.isNoteContentReloaded(this.noteId) || loadResults.getAttributeRows().some(attr =>
+            attr.type === 'label' && attr.noteId === this.noteId
+        )) await this.refresh();
     }
-}
-
-module.exports = autoAdjustTheme;
-
+};

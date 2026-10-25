@@ -1,292 +1,310 @@
 /*
-Blue theme 
+Blue theme — reading edition (TriliumNext >= 0.101.1)
 https://github.com/SiriusXT/trilium-theme-blue
-Version:0.16 for trilium-NEXT:>=0.101.1
+Paste this entire file into a Trilium CSS theme note; no imports needed.
 */
+
 body {
-    --theme-style: light;        
+    --theme-style: light;
+    color-scheme: light;
     --main-background-color: #f2eecb !important;
-    --main-text-color: #000 !important;
-    --main-border-color: #ced4da !important; /*ced4da e8ecf3*/
-  	--alert-bar-background: #f2f2f2 !important;
-
-    /* 设置字体 */
-    --main-font-family: 'LXGW WenKai',sans-serif;
-    --main-font-size: 1.1em;
-
-    --tree-font-family: 'LXGW WenKai',sans-serif;
-    --tree-font-size: 1.1em;
-
-    --detail-font-family: 'LXGW WenKai',sans-serif;
-    --detail-font-size: 1.1em;
-
-    --monospace-font-family: 'LXGW WenKai Mono';
-    --monospace-font-size: 1.1em;
-  
+    --main-text-color: #282b24 !important;
+    --main-border-color: #ced4da !important;
+    --alert-bar-background: #f2f2f2 !important;
     --primary-button-background-color: #4682B4 !important;
     --primary-button-border-color: transparent !important;
-  
-   	--launcher-pane-vert-background-color: #4682B4 !important;
+    --launcher-pane-vert-background-color: #4682B4 !important;
     --launcher-pane-vert-text-color: #f0f4f4ee !important;
-  	--launcher-pane-vert-button-hover-background: #4682B4 !important;
+    --launcher-pane-vert-button-hover-background: #4682B4 !important;
     --launcher-pane-vert-button-hover-shadow: initial !important;
-    --launcher-pane-vert-size:39px !important;
-    --left-pane-item-selected-shadow: initial !important;
+    --launcher-pane-vert-size: 39px !important;
     --left-pane-background-color: #f5f8fb !important;
     --quick-search-background: #E8ECF380 !important;
-    --quick-search-hover-background:#E8ECF390 !important;
+    --quick-search-hover-background: #E8ECF390 !important;
     --cmd-button-background-color: #E8ECF380 !important;
-    --quick-search-focus-background:#E8ECF390 !important;
+    --quick-search-focus-background: #E8ECF390 !important;
     --input-background-color: #E8ECF380 !important;
     --radio-checkbox-background: #E8ECF3 !important;
     --input-focus-background: #E8ECF390 !important;
     --input-hover-background: #E8ECF390 !important;
-    --input-focus-outline-color: transparent !important;
     --left-pane-text-color: #000 !important;
-    --new-tab-button-background:transparent !important;
-    --left-pane-item-action-button-background:transparent !important;
+    --new-tab-button-background: transparent !important;
+    --left-pane-item-action-button-background: transparent !important;
     --root-background: #f5f8fb !important;
     --accented-background-color: #f5f8fb !important;
     --gutter-color: #f5f8fb !important;
     --active-tab-background-color: #4682B450 !important;
     --active-tab-hover-background-color: #4682B470 !important;
-    --active-tab-text-color: #4682B4 !important;
-
+    --active-tab-text-color: #254f6c !important;
     --inactive-tab-background-color: #E8ECF3BB !important;
-    --inactive-tab-hover-background-color: #4682B430 !important;/**/
-    /*--inactive-tab-text-color: #4682B4;*/
-  
-    --scrollbar-border-color: #ccc;
+    --inactive-tab-hover-background-color: #4682B430 !important;
     --tooltip-background-color: #F3f3f3;
     --tooltip-foreground-color: #000;
-    --link-color: #4682B4 !important;
-  	
     --ck-color-base-active: #bfd7f711 !important;
     --ck-color-editable-blur-selection: #bfd7f770 !important;
-    
-    --ck-blockquote-border-color: #e2e9f1;
-    --ck-blockquote-background-color: #e2e9f190;    
-    
+    --ck-blockquote-border-color: #819da8;
+    --ck-blockquote-background-color: #e7e9dc;
     --mermaid-theme: light;
     --ck-color-code-block-label-background: #333;
-    --right-pane-li-hover-background:rgb(235, 235, 235);
-
-    --h2-background-color:rgb(105 154 187);
-    --h3-background-color:rgb(112 175 164);
-    --h4-background-color: #e9b887;
-    --h5-background-color:rgb(190 186 206);
-    --h6-background-color:rgb(197 197 197);
-
+    --right-pane-li-hover-background: rgb(235, 235, 235);
     --launcher-pane-vert-icon-size: 130%;
-  }
+    --link-color: #2b5f86 !important;
+    --input-focus-outline-color: #2b638d;
+    --scrollbar-thumb-color: #7a8794;
+    --scrollbar-thumb-hover-color: #425c73;
+    --scrollbar-background-color: transparent;
+    --blue-wallpaper-overlay: rgb(245 248 251 / 90%);
+    --blue-tree-hover-background: #e6edf2;
+    --blue-tree-active-background: #d5e6f0;
+    --blue-tree-active-text: #193b53;
+    --blue-tree-active-border: #315f80;
+    --blue-tree-branch-1: #83b8c8;
+    --blue-tree-branch-2: #aaa1cc;
+    --blue-tree-branch-3: #9ebe86;
+    --blue-tree-branch-4: #c8b572;
+    --blue-tree-branch-5: #9caed1;
+    --blue-tree-branch-6: #d1a2a2;
+    --blue-heading-1-color: #244b67;
+    --blue-heading-1-border: #7e9eb3;
+    --blue-heading-2-color: #254f6c;
+    --blue-heading-2-background: #e1e9e8;
+    --blue-heading-2-border: #5b819d;
+    --blue-heading-3-color: #2f6259;
+    --blue-heading-3-border: #6b9488;
+    --blue-heading-4-color: #79542b;
+    --blue-heading-5-color: #625375;
+    --blue-heading-6-color: #565e64;
+    --blue-selection-background: #c9dfed;
+    --blue-selection-text: #193b53;
+    --left-pane-item-selected-shadow: inset 3px 0 var(--blue-tree-active-border);
+}
 
-/*left panel wallpaper*/
+/* Shared typography and interaction rules; kept identical in both standalone themes. */
+body {
+    --main-font-family: 'LXGW WenKai', 'Kaiti SC', 'STKaiti', sans-serif;
+    --main-font-size: 1.1rem;
+    --tree-font-family: var(--main-font-family);
+    --tree-font-size: 1.1rem;
+    --detail-font-family: var(--main-font-family);
+    --detail-font-size: 1.2rem;
+    --monospace-font-family: 'LXGW WenKai Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+    --monospace-font-size: 1rem;
+    --blue-reading-line-height: 1.75;
+    --blue-paragraph-indent: 2em;
+    --blue-wallpaper-image: url("../../../custom/background.png");
+    --scrollbar-border-color: transparent;
+}
+
+/* A background overlay quiets the texture without dimming text or icons. */
 #left-pane.component {
-    background-image: url("../../../custom/background.png");
+    background-color: var(--left-pane-background-color);
+    background-image: linear-gradient(var(--blue-wallpaper-overlay), var(--blue-wallpaper-overlay)), var(--blue-wallpaper-image);
 }
 
-
-.tree-actions button.tree-floating-button{
-    color:var(--left-pane-text-color);
+#left-pane .tree-actions button.tree-floating-button {
+    color: var(--left-pane-text-color);
 }
 
-::-webkit-scrollbar-thumb{
-    background-color:#fefefe !important;
+#left-pane .tree {
+    padding-inline: 0;
 }
 
-.tree li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n) {
-    border-left: 3px solid #f4a6a6 ;
-    border-top-left-radius: 10px !important;
-    border-bottom-left-radius: 10px !important;
-}
- 
- .tree li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n+1) {
-    border-left: 3px solid #99d0df;
-    border-top-left-radius: 10px !important;
-    border-bottom-left-radius: 10px !important;
- }
- 
- .tree li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n+2) {
-    border-left: 3px solid #b4afdf ;
-    border-top-left-radius: 10px !important;
-    border-bottom-left-radius: 10px !important;
- }
- 
- .tree li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n+3) {
-    border-left: 3px solid #abd58b ;
-    border-top-left-radius: 10px !important;
-    border-bottom-left-radius: 10px !important;
- }
- 
- .tree li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n+4) {
-    border-left: 3px solid #f3d275 ;
-    border-top-left-radius: 10px !important;
-    border-bottom-left-radius: 10px !important;
- }
- 
-.tree  li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n+5) {
-    border-left: 3px solid #bccdf1;
-    border-top-left-radius: 10px !important;
-    border-bottom-left-radius: 10px !important;
- }
- /*
- li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n):hover {
-    background-color:#f4a6a640 !important;
- }
- 
- li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n+1):hover {
-    background-color:#99d0df40 !important;
- }
- 
- li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n+2):hover {
-    background-color:#b4afdf40 !important;
- }
- 
- li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n+3):hover {
-    background-color:#abd58b40 !important ;
- }
- 
- li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n+4):hover {
-    background-color:#f3d27540 !important ;
- }
- 
- li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n+5):hover {
-    background-color:#bccdf140 !important ;
- }
-*/
- li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n)>span.fancytree-node:hover {
-    background-color:#f4a6a640 !important;
- }
- 
- li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n+1)>span.fancytree-node:hover {
-    background-color:#99d0df40 !important;
- }
- 
- li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n+2)>span.fancytree-node:hover {
-    background-color:#b4afdf40 !important;
- }
- 
- li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n+3)>span.fancytree-node:hover {
-    background-color:#abd58b40 !important ;
- }
- 
- li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n+4)>span.fancytree-node:hover {
-    background-color:#f3d27540 !important ;
- }
- 
- li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n+5)>span.fancytree-node:hover {
-    background-color:#bccdf140 !important ;
- }
-
- #left-pane li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n)>span.fancytree-node.fancytree-active {
-    background-color:#f4a6a680 !important;
- }
- 
- #left-pane li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n+1)> span.fancytree-node.fancytree-active {
-    background-color:#99d0df80 !important;
- }
- 
- #left-pane li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n+2) >span.fancytree-node.fancytree-active {
-    background-color:#b4afdf80 !important;
- }
- 
- #left-pane li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n+3) >span.fancytree-node.fancytree-active {
-    background-color:#abd58b80 !important ;
- }
- 
- #left-pane li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n+4)> span.fancytree-node.fancytree-active {
-    background-color:#f3d27580 !important ;
- }
- 
- #left-pane li.fancytree-lastsib ul li[role='treeitem']:nth-of-type(6n+5)> span.fancytree-node.fancytree-active {
-    background-color:#bccdf180 !important ;
- }
-
-
-/*heading*/  
-.note-split.type-text h1 {
-   padding-left: 0.4em;
-   border-left: 9px solid rgba(0, 0, 0, 1);
-   border-bottom: 1px solid rgba(0, 0, 0, 1);
+/* Branch colors remain decorative; interaction states have their own colors. */
+#left-pane .tree li.fancytree-lastsib ul > li[role='treeitem'] {
+    border-inline-start: 2px solid var(--blue-tree-branch-color);
+    border-start-start-radius: 8px;
+    border-end-start-radius: 8px;
 }
 
-.note-detail-editable-text h2:not(.note-list-widget h2), .note-detail-readonly-text h2:not(.note-list-widget h2) {
-   background: var(--h2-background-color);
-   border-radius: 6px 6px 6px 6px;
-   box-shadow: 0 0 0 1px var(--h2-background-color), 1px 1px 6px 1px var(--h2-background-color);
-   color: #FFFFFF;
-   padding: 5px 10px 4px 10px;
-   text-shadow: 2px 2px 3px #222222;
+#left-pane .tree li[role='treeitem']:nth-of-type(6n+1) { --blue-tree-branch-color: var(--blue-tree-branch-1); }
+#left-pane .tree li[role='treeitem']:nth-of-type(6n+2) { --blue-tree-branch-color: var(--blue-tree-branch-2); }
+#left-pane .tree li[role='treeitem']:nth-of-type(6n+3) { --blue-tree-branch-color: var(--blue-tree-branch-3); }
+#left-pane .tree li[role='treeitem']:nth-of-type(6n+4) { --blue-tree-branch-color: var(--blue-tree-branch-4); }
+#left-pane .tree li[role='treeitem']:nth-of-type(6n+5) { --blue-tree-branch-color: var(--blue-tree-branch-5); }
+#left-pane .tree li[role='treeitem']:nth-of-type(6n) { --blue-tree-branch-color: var(--blue-tree-branch-6); }
+
+#left-pane .tree span.fancytree-node:hover {
+    background-color: var(--blue-tree-hover-background) !important;
 }
 
-.note-detail-editable-text h3:not(.note-list-widget h3), .note-detail-readonly-text h3:not(.note-list-widget h3) {
-   background: var(--h3-background-color);
-   border-radius: 6px 6px 6px 6px;
-   box-shadow: 0 0 0 1px var(--h3-background-color), 1px 1px 6px 1px var(--h3-background-color);
-   color: #FFFFFF;
-   padding: 4px 10px 3px 10px;
-   text-shadow: 2px 2px 3px #222222;
+#left-pane .tree span.fancytree-node.fancytree-active {
+    color: var(--blue-tree-active-text) !important;
+    background-color: var(--blue-tree-active-background) !important;
+    box-shadow: inset 3px 0 var(--blue-tree-active-border);
 }
 
-.note-detail-editable-text h4:not(.note-list-widget h4), .note-detail-readonly-text h4:not(.note-list-widget h4){
-   background: var(--h4-background-color);
-   border-radius: 6px 6px 6px 6px;
-   box-shadow: 0 0 0 1px var(--h4-background-color), 1px 1px 6px 1px var(--h4-background-color);
-   color: #FFFFFF;
-   padding: 3px 10px 2px 10px;
-   text-shadow: 2px 2px 3px #222222;
+#left-pane .tree .fancytree-submatch:not(.fancytree-match) + ul > li {
+    border-inline-start: 0 !important;
 }
 
-.note-detail-editable-text h5:not(.note-book-header):not(.note-list-widget h5), .note-detail-readonly-text h5:not(.note-list-widget h5) {
-   background: var(--h5-background-color);
-   border-radius: 6px 6px 6px 6px;
-   box-shadow: 0 0 0 1px var(--h5-background-color), 1px 1px 6px 1px var(--h5-background-color);
-   color: #FFFFFF;
-   padding: 2px 10px 1px 10px;
-   text-shadow: 2px 2px 3px #222222;
+/* Preserve the base theme's keyboard focus, including menus and CKEditor. */
+body :is(input:not([type]), input[type='text'], input[type='number'], input[type='password'], input[type='date'], input[type='time'], input[type='datetime-local'], textarea, select, .tn-input-field):focus-visible {
+    outline: 2px solid var(--input-focus-outline-color) !important;
+    outline-offset: 2px;
 }
 
-.note-detail-editable-text h6:not(.note-list-widget h6), .note-detail-readonly-text h6:not(.note-list-widget h6) {
-   background: var(--h6-background-color);
-   border-radius: 6px 6px 6px 6px;
-   box-shadow: 0 0 0 1px var(--h6-background-color), 1px 1px 6px 1px var(--h6-background-color);
-   color: #FFFFFF;
-   padding: 1px 10px 0px 10px;
-   text-shadow: 2px 2px 3px #222222;
+#left-pane .fancytree-node.fancytree-focused {
+    outline: 2px solid var(--input-focus-outline-color);
+    outline-offset: -2px;
 }
 
-.note-split.type-text h1, h2, h3, h4, h5, h6{
-    margin-top:.3rem !important;
-    margin-bottom: .15rem !important;
+/* Cover both the wrapper and CKEditor's inner content without em multiplication. */
+:is(.note-detail-editable-text, .note-detail-readonly-text),
+.note-detail-editable-text .ck-content {
+    --ck-content-font-family: var(--detail-font-family);
+    --ck-content-font-size: var(--detail-font-size);
+    --ck-content-line-height: var(--blue-reading-line-height);
+    font-family: var(--detail-font-family);
+    font-size: var(--detail-font-size);
+    line-height: var(--blue-reading-line-height);
 }
 
-/*TOC*/
-.toc-widget span.toc>ol>li{
-    color:var(--h2-background-color);
+/* Hierarchy comes from size and spacing; color is a secondary cue. */
+:is(.note-detail-editable-text, .note-detail-readonly-text) :is(h1, h2, h3, h4, h5, h6):not(:where(.note-list-widget *, .note-book-header, .include-note-title)) {
+    margin-block: 1.5em 0.6em;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    text-shadow: none;
+    font-weight: 600;
+    line-height: 1.4;
+    text-indent: 0;
+    text-align: start;
+    overflow-wrap: anywhere;
+    break-after: avoid;
+    scroll-margin-block-start: 1em;
 }
-.toc-widget span.toc>ol>ol>li{
-    color:var(--h3-background-color);
-}
-.toc-widget span.toc>ol>ol>ol>li{
-    color:var(--h4-background-color);
-}
-.toc-widget span.toc>ol>ol>ol>ol>li{
-    color:var(--h5-background-color);
-}
-.toc-widget span.toc>ol>ol>ol>ol>ol>li{
-    color:var(--h6-background-color);
-}
-/*
-.toc ol{
-    padding-left:15px;
-}*/
 
+:is(.note-detail-editable-text, .note-detail-readonly-text) h1:not(:where(.note-list-widget *, .note-book-header, .include-note-title)) {
+    color: var(--blue-heading-1-color);
+    font-size: 1.85em;
+    padding-block-end: 0.3em;
+    border-block-end: 1px solid var(--blue-heading-1-border);
+}
 
-/*
-	The following are the common parts for both black and light themes
-*/
+:is(.note-detail-editable-text, .note-detail-readonly-text) h2:not(:where(.note-list-widget *, .note-book-header, .include-note-title)) {
+    color: var(--blue-heading-2-color);
+    font-size: 1.5em;
+    padding: 0.3em 0.6em;
+    border-inline-start: 3px solid var(--blue-heading-2-border);
+    border-radius: 0 4px 4px 0;
+    background-color: var(--blue-heading-2-background);
+}
 
-/*Make the notification in the bottom right*/
+:is(.note-detail-editable-text, .note-detail-readonly-text) h3:not(:where(.note-list-widget *, .note-book-header, .include-note-title)) {
+    color: var(--blue-heading-3-color);
+    font-size: 1.3em;
+    border-inline-start: 3px solid var(--blue-heading-3-border);
+    padding-inline-start: 0.6em;
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) h4:not(:where(.note-list-widget *, .note-book-header, .include-note-title)) {
+    color: var(--blue-heading-4-color);
+    font-size: 1.15em;
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) h5:not(:where(.note-list-widget *, .note-book-header, .include-note-title)) {
+    color: var(--blue-heading-5-color);
+    font-size: 1.05em;
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) h6:not(:where(.note-list-widget *, .note-book-header, .include-note-title)) {
+    color: var(--blue-heading-6-color);
+    font-size: 1em;
+}
+
+/* Keep Trilium's optional Markdown markers, but give them less visual weight. */
+body.heading-style-markdown :is(.note-detail-editable-text, .note-detail-readonly-text) :is(h1, h2, h3, h4, h5, h6):not(:where(.note-list-widget *, .note-book-header, .include-note-title))::before {
+    color: inherit;
+    font-size: 0.65em;
+    font-weight: 400;
+    text-shadow: none;
+}
+
+/* TOC text uses foreground colors, not low-contrast heading backgrounds. */
+.toc-widget .toc { color: var(--main-text-color); }
+.toc-widget .toc > ol > li { color: var(--blue-heading-2-color); }
+.toc-widget .toc > ol > ol > li { color: var(--blue-heading-3-color); }
+.toc-widget .toc > ol > ol > ol > li { color: var(--blue-heading-4-color); }
+.toc-widget .toc > ol > ol > ol > ol > li { color: var(--blue-heading-5-color); }
+.toc-widget .toc > ol > ol > ol > ol > ol > li { color: var(--blue-heading-6-color); }
+
+/* Only ordinary, top-level prose receives the Chinese first-line indent. */
+:is(.note-detail-editable-text, .note-detail-readonly-text) p:not(:where(.note-list-widget *)) {
+    margin-block: 0.65em;
+}
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) > p:not(:where(.note-list-widget *)) {
+    text-indent: var(--blue-paragraph-indent);
+    text-align: justify;
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) :is(li, td, th, blockquote, figcaption, .include-note) p:not(:where(.note-list-widget *)) {
+    text-indent: 0;
+    text-align: start;
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) li > p:not(:where(.note-list-widget *)) {
+    margin-block: 0.25em;
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) :is(ul, ol):not(:where(.note-list-widget *)) {
+    margin-block: 0.65em;
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) blockquote:not(:where(.note-list-widget *)) {
+    font-size: 1em;
+    font-style: normal;
+    margin: 1em 0;
+    padding: 0.45em 1em;
+    border: 0 !important; /* The Next base theme sets its card border as important. */
+    border-inline-start: 3px solid var(--ck-blockquote-border-color) !important;
+    border-radius: 0 4px 4px 0;
+    background: var(--ck-blockquote-background-color);
+    box-shadow: none;
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) blockquote:not(:where(.note-list-widget *))::before,
+:is(.note-detail-editable-text, .note-detail-readonly-text) blockquote:not(:where(.note-list-widget *))::after {
+    display: none;
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) a[href]:not(:where(.note-list-widget *)) {
+    color: var(--link-color);
+    word-break: normal;
+    overflow-wrap: anywhere;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) pre:not(:where(.note-list-widget *)) {
+    line-height: 1.6;
+    text-indent: 0;
+    text-align: start;
+}
+
+/* Variables also let code blocks provide their own scrollbar colors. */
+::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-hover-color);
+}
+
+@supports (-moz-appearance: none) {
+    * { scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-background-color); }
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) ::selection {
+    color: var(--blue-selection-text);
+    background-color: var(--blue-selection-background);
+}
+
+/* Compact application chrome; leave content width under Trilium's control. */
 #toast-container {
     right: 10px !important;
     bottom: 10px !important;
@@ -294,211 +312,86 @@ body {
     width: auto !important;
 }
 
-/* Launcher-pane vertical centered */
-#launcher-pane.vertical{
-    align-items: center; 
-}
-
-#launcher-pane.vertical .launcher-button, #launcher-pane.vertical .dropdown{
-	width:37px !important;
-  height:37px !important;
-  margin-right: 1px;
-  margin-left: 1px;
-}
-
-#launcher-pane.vertical{
-    border-right: unset !important;
-}
-#launcher-pane.vertical #launcher-container {
-    width: 100%;
-    scrollbar-width: none; /*Avoid firefox scrollbar blocking*/
-}
-
-#launcher-pane.vertical .icon-action.global-menu-button{
-    padding-top: 0px !important;
-    margin-top: 3px !important;
-    font-size: 1em !important;
-}
-#launcher-pane.vertical .icon-action.global-menu-button .global-menu-button-update-available {
-	top: 17px;
-    left: 12px;
-}
-#launcher-pane .sync-status-disconnected-with-changes {
-    animation: unset !important;
-}
-/*
 #launcher-pane.vertical {
-    width: 40px !important;
-}*/
-
-.tree {
-	padding-right: 0px !important;
-}
-#left-pane div.tree {
-    padding-left: 0 !important;
-}
-/* Let the tree of options not display the left border */
-.tree .fancytree-submatch:not(.fancytree-match) + ul > li {
-  border-left: 0px !important;
+    align-items: center;
+    border-inline-end: 0;
 }
 
-/*Left fold arrow*/
-span.fancytree-node:not(.fancytree-folder) .fancytree-expander::before {
-    content: "\ec21" !important;
-    visibility: visible !important;
-    color: var(--left-pane-text-color) !important;
-    opacity: 0.2;
+#launcher-pane.vertical :is(.launcher-button, .dropdown) {
+    width: 37px !important;
+    height: 37px !important;
+    margin-inline: 1px;
 }
 
-/* title input */
-input:not([type]):focus, input[type="text"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="time"]:focus, input[type="datetime-local"]:focus, textarea.form-control:focus, textarea:focus, .tn-input-field:focus, .tn-input-field:focus-within {
-	outline: 0px solid var(--input-focus-outline-color) !important;
-}
-input:not([type]):focus, input[type="text"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="time"]:focus, input[type="datetime-local"]:focus, textarea.form-control:focus, textarea:focus, .tn-input-field:focus, .tn-input-field:focus-within {
-	transition: none !important;
+#launcher-pane.vertical #launcher-container { width: 100%; }
+
+#launcher-pane.vertical .icon-action.global-menu-button {
+    padding-top: 0;
+    margin-top: 3px;
+    font-size: 1em;
 }
 
-.note-split.type-text .note-detail p, blockquote > p {
-    margin-top: 0.5rem !important;
-    margin-bottom: 0.5rem !important;
-    text-indent: 2em; /* first-line indent */
-    text-align: justify; /* Align both ends */
-}
-.note-split.type-text .note-detail ol p {
-    text-indent: 0; /* first-line indent */
-}
-
-/*Apply only to p and not to any sub elements within p*/
-.note-split.type-text p > * {
-    text-indent: 0;
-}
-
-div.ck-content blockquote {
-	font-size:95% !important;
-    border: unset !important;
-    border-left: 5px solid var(--ck-blockquote-border-color) !important;
-    box-shadow: unset !important;
-    border-radius: 0px !important;
-    margin: 0.5em 0px 0.5em 0px !important;
-    padding: 0.5em 1em !important;
-    background: var(--ck-blockquote-background-color) !important;
-}
-div.ck-content blockquote:before, div.ck-content blockquote:after {
-    display:none;
-}
-ul {
-	margin-bottom: 0px;
-}
-/* .note-split.type-text a { */
-a {
-    color: var(--link-color);
-    word-break: break-all;
-}
-
-/* tab row */
 .tab-row-widget .note-tab .note-tab-title {
-	text-overflow: initial !important;
-}
-.tab-row-widget .note-tab[active] .note-tab-wrapper {
-	box-shadow: unset !important;
+    text-overflow: ellipsis;
 }
 
-/*Make the notes title box not displaying focus animation*/
-input.note-title:focus{
-    transition: none !important;
+.note-detail pre.hljs { box-shadow: none; }
+.ck.ck-editor__editable .ck-code_selected { background-color: hsl(0 0% 78% / 30%); }
+.note-detail :is(.attachment-content-wrapper pre code, .ck-content pre code, .ck-mermaid__editing-view) {
+    padding-block: 0.5em;
 }
 
-/*text-note code*/
-.note-detail pre.hljs{
-	box-shadow: unset !important;
-}
-.ck.ck-editor__editable .ck-code_selected{
-	background-color: hsla(0,0%,78%,.3) !important;
-}
+.ck-content hr { height: 1px; }
+.ck-content .page-break::after { border-top: 2px dashed var(--main-border-color); }
+.ck-math-tex { user-select: all; }
+.workspace-notes .workspace-icon { font-size: 200%; }
+body.zen .title-row { background: var(--left-pane-background-color); }
 
-/*Spacing between the top and bottom of the text block*/
-.note-detail .attachment-content-wrapper pre code, .note-detail .ck-content pre code, .note-detail .ck-mermaid__editing-view {
-	padding-top: 0.5em !important;
-    padding-bottom: 0.5em !important;
-}
-
-/*ckeditor*/
-.ck-content hr {
-	height: 2px !important;
-}
-.ck-content .page-break::after {
-    height: 8px;
-    border-top: 2px dashed rgb(196, 196, 196);
-}
-.katex-display {
-    margin-bottom: 1px !important;
-}
-.attachment-content-wrapper pre, .ck-content pre, .ck-mermaid__editing-view {
-	box-shadow: unset !important;
-}
-.ck-widget.table td.ck-editor__nested-editable.ck-editor__nested-editable_focused, .ck-widget.table td.ck-editor__nested-editable:focus, .ck-widget.table th.ck-editor__nested-editable.ck-editor__nested-editable_focused, .ck-widget.table th.ck-editor__nested-editable:focus {
-    outline:unset !important;
-    outline-offset:unset !important;
-}
-
-/*Right-click menu to quickly open*/
-body > .dropdown-menu {
-    animation: initial !important;
-}
-.dropdown-menu .dropdown-menu {
-    animation: dropdown-menu-opening 100ms ease-in;
-}
-.note-list-wrapper .note-book-card .note-book-content {
-	font-size: 1rem !important;
-}
-
-
-/* Make formulas selectable */
-.ck-math-tex{
-    user-select:all !important;
-}
-
-/* Disable some animations */
-.bx-edit-alt.bx-tada, .bx-edit-alt.bx-lg {
-    animation: none !important;  
-    transition: none !important; 
-}
-.bx-edit-alt.bx-lg {
-    font-size: 150% !important;
-}
-img {
-    transition: none !important;
-}
-
-/* workspace-notes */
-.workspace-notes .workspace-icon{
-	font-size: 200% !important;
-}
-
-.ribbon-container {
-    box-shadow: 0 4px 6px -2px var(--main-border-color);
-}
-
-/* .shared-info-widget {
-  display: none;
-}
-.ribbon-container:has(.basic-properties-widget) ~ .shared-info-widget {
-  display: block;
-} */
-
-/* .scrolling-container.component position: sticky;
-    background: var(--main-background-color);
-    top: 0; */
-
-body.zen .title-row{
-    background: var(--left-pane-background-color);
+/* Respect the platform preference rather than turning off all image feedback. */
+@media (prefers-reduced-motion: reduce) {
+    #launcher-pane .sync-status-disconnected-with-changes,
+    .bx-edit-alt.bx-tada,
+    .bx-edit-alt.bx-lg,
+    .dropdown-menu {
+        animation: none !important;
+        transition: none !important;
+    }
 }
 
 @media print {
-    .title-row, .alert-warning {
-        display:none !important;
+    body {
+        --main-text-color: #000 !important;
+        --main-background-color: #fff !important;
+        --detail-font-size: var(--print-font-size, 11pt);
+        color: #000 !important;
+        background: #fff !important;
     }
-    .note-detail-editable-text h2, h3, h4, h5, h6 {
-      all: revert  !important;
+
+    :is(.note-detail-editable-text, .note-detail-readonly-text),
+    .note-detail-editable-text .ck-content {
+        color: #000 !important;
+        background: transparent !important;
     }
+
+    :is(.note-detail-editable-text, .note-detail-readonly-text) :is(h1, h2, h3, h4, h5, h6):not(:where(.note-list-widget *, .note-book-header, .include-note-title)) {
+        color: #000 !important;
+        background: transparent !important;
+        border: 0 !important;
+        border-radius: 0;
+        padding: 0;
+        box-shadow: none;
+        text-shadow: none;
+        break-after: avoid;
+    }
+
+    :is(.note-detail-editable-text, .note-detail-readonly-text) blockquote {
+        background: transparent;
+        border-inline-start-color: #777 !important;
+    }
+
+    :is(.note-detail-editable-text, .note-detail-readonly-text) a[href] {
+        color: #000;
+    }
+
+    #left-pane.component { background-image: none; }
 }
