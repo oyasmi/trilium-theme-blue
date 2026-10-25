@@ -112,6 +112,21 @@ body {
     --blue-syntax-deletion: #eea8ae;
     --blue-syntax-addition-background: #2a4238;
     --blue-syntax-deletion-background: #493138;
+    /* Independent code-note editor palette. */
+    --blue-editor-background: #232d35;
+    --blue-editor-text: #d8e3eb;
+    --blue-editor-gutter-background: #202930;
+    --blue-editor-gutter-text: #98acba;
+    --blue-editor-active-line: #2a3944;
+    --blue-editor-selection: #334b5a;
+    --blue-editor-search: #394d48;
+    --blue-editor-search-active: #485242;
+    --blue-editor-popup: #2b3b46;
+    --blue-editor-caret: #9acbf0;
+    --blue-editor-token-min: 0.80;
+    --blue-editor-token-max: 0.92;
+    --blue-editor-token-chroma: 0.12;
+
     --blue-inline-code-background: #2b3942;
     --blue-inline-code-text: #b9d8ed;
     --blue-table-background: #22292d;
@@ -328,6 +343,147 @@ body.heading-style-markdown :is(.note-detail-editable-text, .note-detail-readonl
     text-underline-offset: 0.18em;
 }
 
+
+/* Standalone code notes (CodeMirror 6), including their read-only renderer.
+   Keep geometry, line wrapping, folding and editing behavior under CodeMirror's control. */
+:is(.note-detail-code, .note-detail-readonly-code) {
+    --scrollbar-thumb-color: var(--blue-editor-gutter-text);
+    --scrollbar-thumb-hover-color: var(--blue-editor-text);
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) :is(.note-detail-code-editor, .note-detail-readonly-code-content) {
+    margin: 0;
+    padding: 0;
+    background: var(--blue-editor-background);
+    color: var(--blue-editor-text) !important;
+    font-family: var(--monospace-font-family);
+    font-size: var(--monospace-font-size);
+    text-indent: 0;
+    text-align: start;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-editor {
+    background: var(--blue-editor-background) !important;
+    color: var(--blue-editor-text) !important;
+    color-scheme: var(--theme-style);
+    font-size: var(--monospace-font-size);
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-editor .cm-scroller {
+    font-family: var(--monospace-font-family) !important;
+    line-height: 1.7;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-editor .cm-content {
+    padding-block: 0.75em;
+    caret-color: var(--blue-editor-caret) !important;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-cursor,
+:is(.note-detail-code, .note-detail-readonly-code) .cm-dropCursor {
+    border-left-color: var(--blue-editor-caret) !important;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-gutters {
+    color: var(--blue-editor-gutter-text) !important;
+    background: var(--blue-editor-gutter-background) !important;
+    border-inline-end: 1px solid var(--blue-code-border) !important;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-activeLine,
+:is(.note-detail-code, .note-detail-readonly-code) .cm-activeLineGutter {
+    background: var(--blue-editor-active-line) !important;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-activeLineGutter {
+    color: var(--blue-editor-text) !important;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-editor .cm-selectionBackground {
+    background: var(--blue-editor-selection) !important;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-content ::selection {
+    background: var(--blue-editor-selection) !important;
+    color: var(--blue-editor-text);
+}
+
+/* CodeMirror themes generate opaque class names for syntax roles. Preserve their
+   semantic hues and adjust the painted text's lightness instead of matching hashes.
+   The fallback is readable plain text when relative colors are unavailable. */
+:is(.note-detail-code, .note-detail-readonly-code) .cm-line span[class]:not(.cm-widgetBuffer, .cm-placeholder) {
+    -webkit-text-fill-color: var(--blue-editor-text);
+}
+
+@supports (-webkit-text-fill-color: oklch(from red 0.8 0.1 h)) {
+    :is(.note-detail-code, .note-detail-readonly-code) .cm-line span[class]:not(.cm-widgetBuffer, .cm-placeholder) {
+        -webkit-text-fill-color: oklch(from currentColor clamp(var(--blue-editor-token-min), l, var(--blue-editor-token-max)) min(c, var(--blue-editor-token-chroma)) h);
+    }
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-placeholder {
+    color: var(--blue-editor-gutter-text) !important;
+    opacity: 1 !important;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) :is(.cm-selectionMatch, .cm-searchMatch) {
+    background: var(--blue-editor-search) !important;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-activeMatch {
+    background: var(--blue-editor-search-active) !important;
+    outline: 2px solid var(--blue-editor-caret) !important;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-matchingBracket {
+    background: var(--blue-editor-search) !important;
+    outline: 1px solid var(--blue-editor-caret);
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-nonmatchingBracket {
+    text-decoration: underline wavy var(--blue-syntax-deletion);
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-foldPlaceholder {
+    color: var(--blue-editor-gutter-text) !important;
+    background: var(--blue-editor-gutter-background) !important;
+    border-color: var(--blue-code-border) !important;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) :is(.cm-panels, .cm-panel, .cm-tooltip) {
+    color: var(--blue-editor-text) !important;
+    background: var(--blue-editor-popup) !important;
+    border-color: var(--blue-code-border) !important;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-tooltip-autocomplete > ul > li[aria-selected="true"] {
+    color: var(--blue-editor-text) !important;
+    background: var(--blue-editor-selection) !important;
+}
+
+@media print {
+    :is(.note-detail-code, .note-detail-readonly-code) {
+        --blue-editor-background: #fff;
+        --blue-editor-text: #000;
+        --blue-editor-gutter-background: #fff;
+        --blue-editor-gutter-text: #555;
+        --blue-editor-active-line: transparent;
+        --blue-editor-selection: transparent;
+        --blue-editor-search: transparent;
+        --blue-editor-search-active: transparent;
+        --blue-code-border: #bbb;
+    }
+    :is(.note-detail-code, .note-detail-readonly-code) .cm-line span[class] {
+        -webkit-text-fill-color: #000 !important;
+    }
+    :is(.note-detail-code, .note-detail-readonly-code) :is(.cm-selectionLayer, .cm-cursorLayer, .cm-tooltip, .cm-panels) {
+        display: none !important;
+    }
+    :is(.note-detail-code, .note-detail-readonly-code) :is(.cm-activeMatch, .cm-matchingBracket) {
+        outline: none !important;
+    }
+}
+
 /* Text-note code blocks; native widget controls remain outside the scroll area. */
 :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre:has(> code):not(:where(.note-list-widget *, .mermaid, .layout-table *)) {
     position: relative;
@@ -425,7 +581,7 @@ body.heading-style-markdown :is(.note-detail-editable-text, .note-detail-readonl
     overflow-wrap: anywhere;
 }
 
-/* Syntax roles are scoped to text notes, leaving code notes and app chrome alone. */
+/* Highlight.js syntax roles are scoped to text-note code blocks. */
 :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) :is(.hljs, .hljs-subst, .hljs-operator, .hljs-punctuation) { color: var(--blue-code-text); background: transparent; }
 :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) :is(.hljs-comment, .hljs-quote, .hljs-code) { color: var(--blue-syntax-comment); font-style: normal; }
 :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) :is(.hljs-keyword, .hljs-selector-tag, .hljs-literal, .hljs-doctag, .hljs-type) { color: var(--blue-syntax-keyword); }

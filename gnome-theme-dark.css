@@ -264,7 +264,7 @@ body {
     --admonition-warning-accent-color: var(--gnome-text);
     --mermaid-theme: dark;
 
-    /* Rich-text editor chrome. Code-note syntax remains the user's editor setting. */
+    /* Rich-text editor chrome; independent code-note colors are configured below. */
     --ck-color-base-text: var(--gnome-text);
     --ck-color-text: var(--gnome-text);
     --ck-color-focus-border: var(--gnome-olive);
@@ -314,6 +314,21 @@ body {
     --gnome-syntax-deletion: var(--gnome-coral);
     --gnome-syntax-addition-background: #293e30;
     --gnome-syntax-deletion-background: #493332;
+    /* Independent code-note editor palette. */
+    --gnome-editor-background: #192a2b;
+    --gnome-editor-text: #f2d7a4;
+    --gnome-editor-gutter-background: #182627;
+    --gnome-editor-gutter-text: #a4b0a6;
+    --gnome-editor-active-line: #223334;
+    --gnome-editor-selection: #36483c;
+    --gnome-editor-search: #34432d;
+    --gnome-editor-search-active: #46522e;
+    --gnome-editor-popup: #293c3b;
+    --gnome-editor-caret: #c1c78f;
+    --gnome-editor-token-min: 0.78;
+    --gnome-editor-token-max: 0.92;
+    --gnome-editor-token-chroma: 0.12;
+
     --gnome-inline-code-background: var(--gnome-surface);
     --gnome-inline-code-text: #d5dfb1;
     --gnome-table-background: var(--gnome-ink);
@@ -515,6 +530,147 @@ body.heading-style-markdown :is(.note-detail-editable-text, .note-detail-readonl
     text-underline-offset: 0.18em;
 }
 
+
+/* Standalone code notes (CodeMirror 6), including their read-only renderer.
+   Keep geometry, line wrapping, folding and editing behavior under CodeMirror's control. */
+:is(.note-detail-code, .note-detail-readonly-code) {
+    --scrollbar-thumb-color: var(--gnome-editor-gutter-text);
+    --scrollbar-thumb-hover-color: var(--gnome-editor-text);
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) :is(.note-detail-code-editor, .note-detail-readonly-code-content) {
+    margin: 0;
+    padding: 0;
+    background: var(--gnome-editor-background);
+    color: var(--gnome-editor-text) !important;
+    font-family: var(--monospace-font-family);
+    font-size: var(--monospace-font-size);
+    text-indent: 0;
+    text-align: start;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-editor {
+    background: var(--gnome-editor-background) !important;
+    color: var(--gnome-editor-text) !important;
+    color-scheme: var(--theme-style);
+    font-size: var(--monospace-font-size);
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-editor .cm-scroller {
+    font-family: var(--monospace-font-family) !important;
+    line-height: 1.7;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-editor .cm-content {
+    padding-block: 0.75em;
+    caret-color: var(--gnome-editor-caret) !important;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-cursor,
+:is(.note-detail-code, .note-detail-readonly-code) .cm-dropCursor {
+    border-left-color: var(--gnome-editor-caret) !important;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-gutters {
+    color: var(--gnome-editor-gutter-text) !important;
+    background: var(--gnome-editor-gutter-background) !important;
+    border-inline-end: 1px solid var(--gnome-code-border) !important;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-activeLine,
+:is(.note-detail-code, .note-detail-readonly-code) .cm-activeLineGutter {
+    background: var(--gnome-editor-active-line) !important;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-activeLineGutter {
+    color: var(--gnome-editor-text) !important;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-editor .cm-selectionBackground {
+    background: var(--gnome-editor-selection) !important;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-content ::selection {
+    background: var(--gnome-editor-selection) !important;
+    color: var(--gnome-editor-text);
+}
+
+/* CodeMirror themes generate opaque class names for syntax roles. Preserve their
+   semantic hues and adjust the painted text's lightness instead of matching hashes.
+   The fallback is readable plain text when relative colors are unavailable. */
+:is(.note-detail-code, .note-detail-readonly-code) .cm-line span[class]:not(.cm-widgetBuffer, .cm-placeholder) {
+    -webkit-text-fill-color: var(--gnome-editor-text);
+}
+
+@supports (-webkit-text-fill-color: oklch(from red 0.8 0.1 h)) {
+    :is(.note-detail-code, .note-detail-readonly-code) .cm-line span[class]:not(.cm-widgetBuffer, .cm-placeholder) {
+        -webkit-text-fill-color: oklch(from currentColor clamp(var(--gnome-editor-token-min), l, var(--gnome-editor-token-max)) min(c, var(--gnome-editor-token-chroma)) h);
+    }
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-placeholder {
+    color: var(--gnome-editor-gutter-text) !important;
+    opacity: 1 !important;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) :is(.cm-selectionMatch, .cm-searchMatch) {
+    background: var(--gnome-editor-search) !important;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-activeMatch {
+    background: var(--gnome-editor-search-active) !important;
+    outline: 2px solid var(--gnome-editor-caret) !important;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-matchingBracket {
+    background: var(--gnome-editor-search) !important;
+    outline: 1px solid var(--gnome-editor-caret);
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-nonmatchingBracket {
+    text-decoration: underline wavy var(--gnome-syntax-deletion);
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-foldPlaceholder {
+    color: var(--gnome-editor-gutter-text) !important;
+    background: var(--gnome-editor-gutter-background) !important;
+    border-color: var(--gnome-code-border) !important;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) :is(.cm-panels, .cm-panel, .cm-tooltip) {
+    color: var(--gnome-editor-text) !important;
+    background: var(--gnome-editor-popup) !important;
+    border-color: var(--gnome-code-border) !important;
+}
+
+:is(.note-detail-code, .note-detail-readonly-code) .cm-tooltip-autocomplete > ul > li[aria-selected="true"] {
+    color: var(--gnome-editor-text) !important;
+    background: var(--gnome-editor-selection) !important;
+}
+
+@media print {
+    :is(.note-detail-code, .note-detail-readonly-code) {
+        --gnome-editor-background: #fff;
+        --gnome-editor-text: #000;
+        --gnome-editor-gutter-background: #fff;
+        --gnome-editor-gutter-text: #555;
+        --gnome-editor-active-line: transparent;
+        --gnome-editor-selection: transparent;
+        --gnome-editor-search: transparent;
+        --gnome-editor-search-active: transparent;
+        --gnome-code-border: #bbb;
+    }
+    :is(.note-detail-code, .note-detail-readonly-code) .cm-line span[class] {
+        -webkit-text-fill-color: #000 !important;
+    }
+    :is(.note-detail-code, .note-detail-readonly-code) :is(.cm-selectionLayer, .cm-cursorLayer, .cm-tooltip, .cm-panels) {
+        display: none !important;
+    }
+    :is(.note-detail-code, .note-detail-readonly-code) :is(.cm-activeMatch, .cm-matchingBracket) {
+        outline: none !important;
+    }
+}
+
 /* Text-note code blocks; native widget controls remain outside the scroll area. */
 :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre:has(> code):not(:where(.note-list-widget *, .mermaid, .layout-table *)) {
     position: relative;
@@ -611,7 +767,7 @@ body.heading-style-markdown :is(.note-detail-editable-text, .note-detail-readonl
     overflow-wrap: anywhere;
 }
 
-/* Syntax roles are scoped to text notes, leaving code notes and app chrome alone. */
+/* Highlight.js syntax roles are scoped to text-note code blocks. */
 :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) :is(.hljs, .hljs-subst, .hljs-operator, .hljs-punctuation) { color: var(--gnome-code-text); background: transparent; }
 :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) :is(.hljs-comment, .hljs-quote, .hljs-code) { color: var(--gnome-syntax-comment); font-style: italic; }
 :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) :is(.hljs-keyword, .hljs-selector-tag, .hljs-literal, .hljs-doctag, .hljs-type) { color: var(--gnome-syntax-keyword); }
