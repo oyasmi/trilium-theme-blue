@@ -1,0 +1,879 @@
+/*
+gnome — an Emacs-inspired dark reading theme for TriliumNext.
+Theme note attributes: #appTheme=gnome #appThemeBase=next-dark
+Paste this entire file into a CSS note. No imports, images or online fonts.
+Based on the reading edition of SiriusXT/trilium-theme-blue (MIT).
+Verified with 0.106.1 base styles in an isolated fixture; Next base required.
+*/
+
+body {
+    --theme-style: dark;
+    color-scheme: dark;
+
+    /* Screenshot anchors: ink #192a2b, parchment #f2d7a4, olive #2f3e19. */
+    --gnome-ink: #192a2b;
+    --gnome-sidebar: #182627;
+    --gnome-rail: #162323;
+    --gnome-surface: #223334;
+    --gnome-raised: #293c3b;
+    --gnome-text: #f2d7a4;
+    --gnome-ui-text: #c0b69c;
+    --gnome-muted: #a4b0a6;
+    --gnome-border: #3d504b;
+    --gnome-border-subtle: #2c3e3b;
+    --gnome-olive: #c1c78f;
+    --gnome-olive-background: #2f3e19;
+    --gnome-olive-hover: #3b4b27;
+    --gnome-cyan: #9fcfdf;
+    --gnome-mint: #71ffc9;
+    --gnome-coral: #fa9d96;
+    --gnome-lilac: #c5b5d7;
+
+    /* Application surfaces and controls. */
+    --main-background-color: var(--gnome-ink) !important;
+    --main-text-color: var(--gnome-text) !important;
+    --main-border-color: var(--gnome-border);
+    --subtle-border-color: var(--gnome-border-subtle);
+    --second-border-color: var(--gnome-border);
+    --bs-border-color: var(--gnome-border);
+    --root-background: var(--gnome-sidebar);
+    --native-titlebar-background: var(--gnome-sidebar);
+    --window-background-color-bgfx: var(--gnome-sidebar);
+    --center-pane-vert-layout-background-color-bgfx: var(--gnome-ink);
+    --center-pane-horiz-layout-background-color-bgfx: var(--gnome-ink);
+    --accented-background-color: var(--gnome-surface);
+    --more-accented-background-color: var(--gnome-raised);
+    --gutter-color: var(--gnome-border-subtle);
+    --gutter-hover-color: #6c8e8e;
+    --muted-text-color: var(--gnome-muted);
+    --button-background-color: transparent;
+    --button-text-color: var(--gnome-ui-text);
+    --button-border-color: var(--gnome-border);
+    --button-border-radius: 4px;
+    --button-disabled-background-color: transparent;
+    --button-disabled-text-color: var(--gnome-muted);
+    --primary-button-background-color: var(--gnome-olive);
+    --primary-button-text-color: #1d2a18;
+    --primary-button-border-color: transparent;
+    --cmd-button-background-color: var(--gnome-surface);
+    --cmd-button-text-color: var(--gnome-ui-text);
+    --cmd-button-hover-background-color: var(--gnome-raised);
+    --cmd-button-hover-text-color: var(--gnome-text);
+    --cmd-button-icon-color: var(--gnome-ui-text);
+    --cmd-button-shadow-color: transparent;
+    --cmd-button-keyboard-shortcut-background: var(--gnome-sidebar);
+    --cmd-button-keyboard-shortcut-color: var(--gnome-ui-text);
+    --low-profile-button-active-background-color: var(--gnome-olive-background);
+    --low-profile-button-active-color: var(--gnome-text);
+    --button-group-background-color: var(--gnome-sidebar);
+    --button-group-active-button-background-color: var(--gnome-olive-background);
+    --button-group-active-button-color: var(--gnome-text);
+    --button-group-active-button-shadow-color: transparent;
+    --icon-button-color: var(--gnome-ui-text);
+    --icon-button-hover-background: var(--gnome-raised);
+    --icon-button-hover-color: var(--gnome-text);
+    --opaque-icon-button-background: var(--gnome-surface);
+    --opaque-icon-button-color: var(--gnome-ui-text);
+    --opaque-icon-button-hover-background-color: var(--gnome-raised);
+    --opaque-icon-button-hover-color: var(--gnome-text);
+
+    --input-background-color: var(--gnome-surface);
+    --input-text-color: var(--gnome-text);
+    --input-placeholder-color: var(--gnome-muted);
+    --input-hover-background: var(--gnome-raised);
+    --input-hover-color: var(--gnome-text);
+    --input-focus-background: var(--gnome-raised);
+    --input-focus-color: var(--gnome-text);
+    --input-focus-outline-color: var(--gnome-olive);
+    --input-selection-background: #425345;
+    --input-selection-text-color: #fff0cd;
+    --input-action-button-color: var(--gnome-ui-text);
+    --input-action-button-hover: var(--gnome-text);
+    --select-focus-background: var(--gnome-raised);
+    --select-focus-text-color: var(--gnome-text);
+    --select-dropdown-text-color: var(--gnome-text);
+    --select-group-heading-text-color: var(--gnome-muted);
+    --radio-checkbox-background: #465952;
+    --radio-checkbox-hover-background: #647866;
+    --radio-checkbox-indicator-color: var(--gnome-text);
+
+    --link-color: var(--gnome-cyan);
+    --link-hover-background: #293e3e;
+    --link-hover-color: #b9e0e8;
+    --link-selection-outline-color: var(--gnome-cyan);
+    --hover-item-background-color: var(--gnome-raised);
+    --hover-item-text-color: var(--gnome-text);
+    --hover-item-border-color: transparent;
+    --active-item-background-color: var(--gnome-olive-background);
+    --active-item-text-color: var(--gnome-text);
+    --active-item-border-color: var(--gnome-olive);
+    --selection-background-color: var(--input-selection-background);
+
+    /* Opaque raised surfaces retain the palette with or without backdrop effects. */
+    --menu-background-color: var(--gnome-raised);
+    --menu-background-color-no-backdrop: var(--gnome-raised);
+    --menu-text-color: var(--gnome-text);
+    --menu-item-icon-color: var(--gnome-ui-text);
+    --menu-item-keyboard-shortcut-color: var(--gnome-muted);
+    --menu-item-arrow-color: var(--gnome-ui-text);
+    --menu-item-delimiter-color: var(--gnome-border);
+    --menu-item-group-header-color: var(--gnome-muted);
+    --menu-section-background-color: var(--gnome-surface);
+    --menu-submenu-mobile-background-color: var(--gnome-surface);
+    --dropdown-border-color: var(--gnome-border);
+    --dropdown-border-radius: 6px;
+    --dropdown-backdrop-filter: none;
+    --dropdown-item-icon-destructive-color: var(--gnome-coral);
+    --contextual-help-icon-color: var(--gnome-cyan);
+    --modal-background-color: var(--gnome-surface);
+    --modal-border-color: var(--gnome-border);
+    --modal-title-color: var(--gnome-text);
+    --modal-backdrop-color: #101c1d;
+    --modal-control-button-background: var(--gnome-raised);
+    --modal-control-button-color: var(--gnome-ui-text);
+    --modal-control-button-hover-background: var(--gnome-olive-background);
+    --modal-control-button-hover-color: var(--gnome-text);
+    --modal-footer-background: var(--gnome-sidebar);
+    --modal-footer-color: var(--gnome-ui-text);
+    --tool-dialog-background-color: var(--gnome-surface);
+    --toast-background: var(--gnome-raised);
+    --toast-text-color: var(--gnome-text);
+    --toast-close-button-background: var(--gnome-surface);
+    --tooltip-background-color: var(--gnome-raised);
+    --tooltip-foreground-color: var(--gnome-text);
+    --tooltip-kbd-color: var(--gnome-text);
+    --tooltip-kbd-background: var(--gnome-sidebar);
+    --tooltip-kbd-border: var(--gnome-border);
+    --note-tooltip-background-color: var(--gnome-raised);
+    --help-background-color: var(--gnome-raised);
+    --help-card-background: var(--gnome-surface);
+    --help-card-heading-color: var(--gnome-olive);
+    --help-kbd-shortcut-color: var(--gnome-text);
+    --help-kbd-shortcut-background: var(--gnome-sidebar);
+    --help-kbd-shortcut-border: var(--gnome-border);
+    --help-code-color: var(--gnome-text);
+    --help-code-background: var(--gnome-sidebar);
+
+    /* Sidebar, both launcher orientations, tabs, inspector and status bar. */
+    --left-pane-background-color: var(--gnome-sidebar);
+    --left-pane-text-color: var(--gnome-ui-text);
+    --left-pane-icon-color: var(--gnome-ui-text);
+    --left-pane-collapsed-border-color: var(--gnome-border);
+    --left-pane-item-hover-background: var(--gnome-surface);
+    --left-pane-item-selected-background: var(--gnome-olive-background);
+    --left-pane-item-selected-color: var(--gnome-text);
+    --left-pane-item-selected-shadow: inset 2px 0 var(--gnome-olive);
+    --left-pane-item-action-button-background: var(--gnome-raised);
+    --left-pane-item-action-button-color: var(--gnome-text);
+    --left-pane-item-action-button-hover-background: var(--gnome-olive-hover);
+    --left-pane-item-action-button-hover-shadow: none;
+    --left-pane-item-selected-action-button-hover-shadow: none;
+    --launcher-pane-background-color: var(--gnome-rail);
+    --launcher-pane-text-color: var(--gnome-ui-text);
+    --launcher-pane-vert-background-color: var(--gnome-rail);
+    --launcher-pane-vert-background-color-bgfx: var(--gnome-rail);
+    --launcher-pane-vert-text-color: var(--gnome-ui-text);
+    --launcher-pane-vert-button-hover-color: var(--gnome-text);
+    --launcher-pane-vert-button-hover-background: var(--gnome-olive-background);
+    --launcher-pane-vert-button-hover-shadow: none;
+    --launcher-pane-vert-size: 40px;
+    --launcher-pane-vert-icon-size: 130%;
+    --launcher-pane-horiz-background-color: var(--gnome-sidebar);
+    --launcher-pane-horiz-background-color-bgfx: var(--gnome-sidebar);
+    --launcher-pane-horiz-border-color: var(--gnome-border-subtle);
+    --launcher-pane-horiz-border-color-bgfx: var(--gnome-border-subtle);
+    --launcher-pane-horiz-text-color: var(--gnome-ui-text);
+    --launcher-pane-horiz-button-hover-color: var(--gnome-text);
+    --launcher-pane-horiz-button-hover-background: var(--gnome-olive-background);
+    --launcher-pane-horiz-button-hover-shadow: none;
+    --classic-toolbar-vert-layout-background-color: var(--gnome-sidebar);
+    --classic-toolbar-horiz-layout-background-color: var(--gnome-sidebar);
+    --quick-search-background: var(--gnome-surface);
+    --quick-search-color: var(--gnome-muted);
+    --quick-search-hover-background: var(--gnome-raised);
+    --quick-search-focus-background: var(--gnome-raised);
+    --quick-search-focus-border: var(--gnome-olive);
+    --quick-search-focus-color: var(--gnome-text);
+    --quick-search-result-content-background: var(--gnome-sidebar);
+    --quick-search-result-highlight-color: var(--gnome-olive);
+    --quick-search-result-fuzzy-highlight-color: var(--gnome-text);
+    --new-tab-button-background: transparent;
+    --new-tab-button-color: var(--gnome-ui-text);
+    --new-tab-button-shadow: none;
+    --new-tab-button-hover-background: var(--gnome-olive-background);
+    --new-tab-button-hover-color: var(--gnome-text);
+    --active-tab-background-color: var(--gnome-olive-background) !important;
+    --active-tab-hover-background-color: var(--gnome-olive-hover) !important;
+    --active-tab-text-color: var(--gnome-text);
+    --active-tab-icon-color: var(--gnome-olive);
+    --active-tab-shadow: inset 0 2px var(--gnome-olive);
+    --active-tab-dragging-shadow: 0 4px 12px rgb(10 20 19 / 40%);
+    --inactive-tab-background-color: transparent;
+    --inactive-tab-hover-background-color: var(--gnome-surface);
+    --inactive-tab-text-color: var(--gnome-ui-text);
+    --tab-close-button-hover-background: #68433e;
+    --tab-close-button-hover-color: #ffe1d5;
+    --right-pane-background-color: var(--gnome-ink);
+    --right-pane-background-color-bgfx: var(--gnome-ink);
+    --right-pane-heading-color: var(--gnome-ui-text);
+    --right-pane-peek-background: var(--gnome-surface);
+    --right-pane-item-hover-background: var(--gnome-raised);
+    --right-pane-item-hover-color: var(--gnome-text);
+    --right-pane-li-hover-background: var(--gnome-raised);
+    --bottom-panel-background-color: var(--gnome-sidebar);
+    --bottom-panel-title-bar-background-color: #1d2a18;
+    --status-bar-border-color: #687753;
+    --scrollbar-thumb-color: #6c8e8e;
+    --scrollbar-thumb-hover-color: #9fb3aa;
+    --scrollbar-background-color: transparent;
+    --scrollbar-border-color: transparent;
+
+    /* Quiet collections and widgets; semantic warnings keep their own colors. */
+    --card-background-color: var(--gnome-surface);
+    --card-background-hover-color: var(--gnome-raised);
+    --card-border-color: var(--gnome-border-subtle);
+    --card-box-shadow: none;
+    --badge-background-color: var(--gnome-olive-background);
+    --badge-text-color: var(--gnome-ui-text);
+    --note-icon-background-color: var(--gnome-surface);
+    --note-icon-color: var(--gnome-olive);
+    --note-icon-hover-background-color: var(--gnome-raised);
+    --promoted-attribute-card-background-color: var(--gnome-surface);
+    --floating-button-background-color: var(--gnome-raised);
+    --floating-button-color: var(--gnome-ui-text);
+    --floating-button-hover-background: var(--gnome-olive-background);
+    --floating-button-hover-color: var(--gnome-text);
+    --floating-button-hide-button-background: var(--gnome-surface);
+    --floating-button-hide-button-color: var(--gnome-ui-text);
+    --alert-bar-background: var(--gnome-surface);
+    --inline-code-background-color: var(--gnome-surface);
+    --inline-code-border-color: var(--gnome-border);
+    --inline-code-hover-background-color: var(--gnome-raised);
+    --calendar-day-highlight-background: var(--gnome-olive-background);
+    --task-checkbox-without-state-background: #465952;
+    --task-checkbox-without-state-hover-background: #647866;
+    --task-checkbox-with-state-background: var(--gnome-olive-background);
+    --task-checkbox-with-state-hover-background: var(--gnome-olive-hover);
+    --task-checkbox-done-color: #aabf8b;
+    --task-checkbox-done-hover-color: #c1d2a2;
+    --task-checkbox-glyph-color: var(--gnome-rail);
+    --admonition-note-accent-color: var(--gnome-cyan);
+    --admonition-tip-accent-color: #aabf8b;
+    --admonition-important-accent-color: var(--gnome-lilac);
+    --admonition-caution-accent-color: var(--gnome-coral);
+    --admonition-warning-accent-color: var(--gnome-text);
+    --mermaid-theme: dark;
+
+    /* Rich-text editor chrome. Code-note syntax remains the user's editor setting. */
+    --ck-color-base-text: var(--gnome-text);
+    --ck-color-text: var(--gnome-text);
+    --ck-color-focus-border: var(--gnome-olive);
+    --ck-color-selector-focused-cell-background: #354b3d;
+    --ck-color-base-active: var(--gnome-olive-background);
+    --ck-color-base-active-focus: var(--gnome-olive-hover);
+    --ck-color-editable-blur-selection: #34463b;
+    --ck-editor-popup-border-color: var(--gnome-border);
+    --ck-editor-toolbar-button-on-background: var(--gnome-olive-background);
+    --ck-editor-toolbar-button-on-color: var(--gnome-text);
+    --ck-editor-toolbar-button-on-shadow: none;
+    --ck-editor-toolbar-dropdown-button-open-background: var(--gnome-raised);
+    --ck-blockquote-border-color: #8b9e72;
+    --ck-blockquote-background-color: var(--gnome-surface);
+
+    /* Reading palette: deliberately fewer colors than the blue themes. */
+    --gnome-tree-hover-background: var(--gnome-surface);
+    --gnome-tree-active-background: var(--gnome-olive-background);
+    --gnome-tree-active-text: var(--gnome-text);
+    --gnome-tree-active-border: var(--gnome-olive);
+    --gnome-tree-branch-color: #485a48;
+    --gnome-heading-1-color: var(--gnome-text);
+    --gnome-heading-1-border: var(--gnome-border);
+    --gnome-heading-2-color: var(--gnome-olive);
+    --gnome-heading-2-border: #8b9e72;
+    --gnome-heading-3-color: #c3ceb0;
+    --gnome-heading-4-color: #dfc79e;
+    --gnome-heading-5-color: #c0bca5;
+    --gnome-heading-6-color: #b3bdb0;
+    --gnome-selection-background: var(--input-selection-background);
+    --gnome-selection-text: var(--input-selection-text-color);
+    --gnome-code-background: #172728;
+    --gnome-code-text: var(--gnome-text);
+    --gnome-code-border: var(--gnome-border);
+    --gnome-code-accent: #6c8e8e;
+    --gnome-code-label-background: var(--gnome-surface);
+    --gnome-code-label-text: var(--gnome-ui-text);
+    --ck-color-code-block-label-background: var(--gnome-code-label-background);
+    --code-block-box-shadow: none;
+    --gnome-syntax-comment: var(--gnome-cyan);
+    --gnome-syntax-keyword: var(--gnome-coral);
+    --gnome-syntax-string: var(--gnome-mint);
+    --gnome-syntax-number: var(--gnome-lilac);
+    --gnome-syntax-title: var(--gnome-cyan);
+    --gnome-syntax-variable: var(--gnome-text);
+    --gnome-syntax-meta: #b3c8b0;
+    --gnome-syntax-deletion: var(--gnome-coral);
+    --gnome-syntax-addition-background: #293e30;
+    --gnome-syntax-deletion-background: #493332;
+    --gnome-inline-code-background: var(--gnome-surface);
+    --gnome-inline-code-text: #d5dfb1;
+    --gnome-table-background: var(--gnome-ink);
+    --gnome-table-stripe: #1e3030;
+    --gnome-table-header-background: var(--gnome-surface);
+    --gnome-table-header-text: var(--gnome-olive);
+    --gnome-table-border: var(--gnome-border);
+    --gnome-table-divider: var(--gnome-border-subtle);
+    --gnome-table-hover: #293e37;
+    --gnome-table-focus: #354b3d;
+    --gnome-table-selection: rgb(193 199 143 / 25%);
+    --gnome-caption-text: var(--gnome-muted);
+}
+
+/* Standalone reading rules, derived from the blue reading edition. */
+body {
+    --main-font-family: 'LXGW WenKai', 'Kaiti SC', 'STKaiti', sans-serif;
+    --main-font-size: 1.1rem;
+    --tree-font-family: var(--main-font-family);
+    --tree-font-size: 1.1rem;
+    --detail-font-family: var(--main-font-family);
+    --detail-font-size: 1.2rem;
+    --monospace-font-family: 'LXGW WenKai Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+    --monospace-font-size: 1rem;
+    --gnome-reading-line-height: 1.75;
+    --gnome-paragraph-indent: 2em;
+    --scrollbar-border-color: transparent;
+}
+
+/* Solid ink surfaces keep the screenshot's calm, texture-free appearance. */
+#left-pane.component {
+    background-color: var(--left-pane-background-color);
+    background-image: none;
+}
+
+#left-pane .tree-actions button.tree-floating-button {
+    color: var(--left-pane-text-color);
+}
+
+#left-pane .tree {
+    padding-inline: 0;
+}
+
+/* One quiet branch color; selection and keyboard focus have separate cues. */
+#left-pane .tree li.fancytree-lastsib ul > li[role='treeitem'] {
+    border-inline-start: 1px solid var(--gnome-tree-branch-color);
+}
+
+#left-pane .tree span.fancytree-node:hover {
+    background-color: var(--gnome-tree-hover-background) !important;
+}
+
+#left-pane .tree span.fancytree-node.fancytree-active {
+    color: var(--gnome-tree-active-text) !important;
+    background-color: var(--gnome-tree-active-background) !important;
+    box-shadow: inset 2px 0 var(--gnome-tree-active-border);
+}
+
+#left-pane .tree .fancytree-submatch:not(.fancytree-match) + ul > li {
+    border-inline-start: 0 !important;
+}
+
+/* Preserve the base theme's keyboard focus, including menus and CKEditor. */
+body :is(input:not([type]), input[type='text'], input[type='number'], input[type='password'], input[type='date'], input[type='time'], input[type='datetime-local'], textarea, select, .tn-input-field):focus-visible {
+    outline: 2px solid var(--input-focus-outline-color) !important;
+    outline-offset: 2px;
+}
+
+#left-pane .fancytree-node.fancytree-focused {
+    outline: 2px solid var(--input-focus-outline-color);
+    outline-offset: -2px;
+}
+
+/* Cover both the wrapper and CKEditor's inner content without em multiplication. */
+:is(.note-detail-editable-text, .note-detail-readonly-text),
+:is(.note-detail-editable-text, .note-detail-readonly-text) .ck-content {
+    --ck-content-font-family: var(--detail-font-family);
+    --ck-content-font-size: var(--detail-font-size);
+    --ck-content-line-height: var(--gnome-reading-line-height);
+    font-family: var(--detail-font-family);
+    font-size: var(--detail-font-size);
+    line-height: var(--gnome-reading-line-height);
+}
+
+/* Hierarchy comes from size and spacing; color is a secondary cue. */
+:is(.note-detail-editable-text, .note-detail-readonly-text) :is(h1, h2, h3, h4, h5, h6):not(:where(.note-list-widget *, .note-book-header, .include-note-title)) {
+    margin-block: 1.5em 0.6em;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    text-shadow: none;
+    font-weight: 600;
+    line-height: 1.4;
+    text-indent: 0;
+    text-align: start;
+    overflow-wrap: anywhere;
+    break-after: avoid;
+    scroll-margin-block-start: 1em;
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) h1:not(:where(.note-list-widget *, .note-book-header, .include-note-title)) {
+    color: var(--gnome-heading-1-color);
+    font-size: 1.85em;
+    padding-block-end: 0.3em;
+    border-block-end: 1px solid var(--gnome-heading-1-border);
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) h2:not(:where(.note-list-widget *, .note-book-header, .include-note-title)) {
+    color: var(--gnome-heading-2-color);
+    font-size: 1.5em;
+    padding-inline-start: 0.6em;
+    border-inline-start: 2px solid var(--gnome-heading-2-border);
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) h3:not(:where(.note-list-widget *, .note-book-header, .include-note-title)) {
+    color: var(--gnome-heading-3-color);
+    font-size: 1.3em;
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) h4:not(:where(.note-list-widget *, .note-book-header, .include-note-title)) {
+    color: var(--gnome-heading-4-color);
+    font-size: 1.15em;
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) h5:not(:where(.note-list-widget *, .note-book-header, .include-note-title)) {
+    color: var(--gnome-heading-5-color);
+    font-size: 1.05em;
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) h6:not(:where(.note-list-widget *, .note-book-header, .include-note-title)) {
+    color: var(--gnome-heading-6-color);
+    font-size: 1em;
+}
+
+/* Keep Trilium's optional Markdown markers, but give them less visual weight. */
+body.heading-style-markdown :is(.note-detail-editable-text, .note-detail-readonly-text) :is(h1, h2, h3, h4, h5, h6):not(:where(.note-list-widget *, .note-book-header, .include-note-title))::before {
+    color: inherit;
+    font-size: 0.65em;
+    font-weight: 400;
+    text-shadow: none;
+}
+
+/* TOC text uses foreground colors, not low-contrast heading backgrounds. */
+.toc-widget .toc { color: var(--main-text-color); }
+.toc-widget .toc > ol > li { color: var(--gnome-heading-2-color); }
+.toc-widget .toc > ol > ol > li { color: var(--gnome-heading-3-color); }
+.toc-widget .toc > ol > ol > ol > li { color: var(--gnome-heading-4-color); }
+.toc-widget .toc > ol > ol > ol > ol > li { color: var(--gnome-heading-5-color); }
+.toc-widget .toc > ol > ol > ol > ol > ol > li { color: var(--gnome-heading-6-color); }
+
+/* Only ordinary, top-level prose receives the Chinese first-line indent. */
+:is(.note-detail-editable-text, .note-detail-readonly-text) p:not(:where(.note-list-widget *)) {
+    margin-block: 0.65em;
+}
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) > p:not(:where(.note-list-widget *)) {
+    text-indent: var(--gnome-paragraph-indent);
+    text-align: justify;
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) :is(li, td, th, blockquote, figcaption, .include-note) p:not(:where(.note-list-widget *)) {
+    text-indent: 0;
+    text-align: start;
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) li > p:not(:where(.note-list-widget *)) {
+    margin-block: 0.25em;
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) :is(ul, ol):not(:where(.note-list-widget *)) {
+    margin-block: 0.65em;
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) blockquote:not(:where(.note-list-widget *)) {
+    font-size: 1em;
+    font-style: normal;
+    margin: 1em 0;
+    padding: 0.45em 1em;
+    border: 0 !important; /* The Next base theme sets its card border as important. */
+    border-inline-start: 3px solid var(--ck-blockquote-border-color) !important;
+    border-radius: 0 4px 4px 0;
+    background: var(--ck-blockquote-background-color);
+    box-shadow: none;
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) blockquote:not(:where(.note-list-widget *))::before,
+:is(.note-detail-editable-text, .note-detail-readonly-text) blockquote:not(:where(.note-list-widget *))::after {
+    display: none;
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) a[href]:not(:where(.note-list-widget *)) {
+    color: var(--link-color);
+    word-break: normal;
+    overflow-wrap: anywhere;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+}
+
+/* Text-note code blocks; native widget controls remain outside the scroll area. */
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre:has(> code):not(:where(.note-list-widget *, .mermaid, .layout-table *)) {
+    position: relative;
+    margin-block: 1.15em !important; /* Next's code-card margin is also important. */
+    padding: 0;
+    min-width: 0;
+    max-width: 100%;
+    border: 1px solid var(--gnome-code-border);
+    border-radius: 6px;
+    background: var(--gnome-code-background);
+    color: var(--gnome-code-text) !important; /* Trilium's pre:not(.hljs) is important. */
+    box-shadow: none;
+    font-family: var(--monospace-font-family);
+    font-size: var(--monospace-font-size);
+    line-height: 1.65;
+    text-indent: 0;
+    text-align: start;
+    tab-size: 4;
+    --copy-button-margin-size: 0.4em;
+}
+
+/* Scroll code, not pre: clipping pre hides CKEditor's insertion handles. */
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .mermaid, .layout-table *)) > code {
+    display: block;
+    padding: 1em 1.2em;
+    border: 0;
+    border-radius: 0 0 5px 5px;
+    background: transparent;
+    color: inherit;
+    box-shadow: none;
+    font: inherit;
+    overflow: auto;
+    overflow-wrap: normal;
+    word-break: normal;
+    --scrollbar-thumb-color: var(--gnome-code-accent);
+    --scrollbar-thumb-hover-color: var(--gnome-code-text);
+}
+
+/* Keep Trilium's word-wrap preference, including long terminal commands. */
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text):not(.word-wrap) pre > code:not(:where(.note-list-widget *, .layout-table *)) { white-space: pre; }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text).word-wrap pre > code:not(:where(.note-list-widget *, .layout-table *)) {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre[data-language]:not(:where(.note-list-widget *, .layout-table *)) > code {
+    padding-block-start: 2.65em;
+}
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre[data-language]:not(:where(.note-list-widget *, .layout-table *))::after {
+    content: attr(data-language);
+    position: absolute;
+    inset-block-start: 0.5em;
+    inset-inline: auto 0.85em;
+    max-width: calc(100% - 1.7em);
+    padding: 0.15em 0.65em;
+    border-radius: 4px;
+    background: var(--gnome-code-label-background);
+    color: var(--gnome-code-label-text);
+    font-family: var(--monospace-font-family);
+    font-size: 0.75em;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
+}
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre:has(> button.copy-button):not(:where(.note-list-widget *)) { padding-inline-end: 0; }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre:has(> button.copy-button):not(:where(.note-list-widget *)) > code { padding-inline-end: 3.25em; }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre > button.copy-button:not(:where(.note-list-widget *)) {
+    color: var(--gnome-code-label-text);
+    background: var(--gnome-code-label-background);
+    border: 1px solid var(--gnome-code-border);
+    border-radius: 4px;
+    opacity: 1;
+}
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre > button.copy-button:focus-visible {
+    outline: 2px solid var(--input-focus-outline-color);
+    outline-offset: 2px;
+}
+
+/* Inline code belongs to prose and must not add padding inside a code block. */
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) :not(pre) > code:not(:where(pre *, .note-list-widget *, .layout-table *)) {
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+    background: var(--gnome-inline-code-background);
+    color: var(--gnome-inline-code-text);
+    font-family: var(--monospace-font-family);
+    font-size: 0.85em;
+    overflow-wrap: anywhere;
+}
+
+/* Syntax roles are scoped to text notes, leaving code notes and app chrome alone. */
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) :is(.hljs, .hljs-subst, .hljs-operator, .hljs-punctuation) { color: var(--gnome-code-text); background: transparent; }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) :is(.hljs-comment, .hljs-quote, .hljs-code) { color: var(--gnome-syntax-comment); font-style: italic; }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) :is(.hljs-keyword, .hljs-selector-tag, .hljs-literal, .hljs-doctag, .hljs-type) { color: var(--gnome-syntax-keyword); }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) :is(.hljs-string, .hljs-regexp, .hljs-selector-attr, .hljs-selector-pseudo) { color: var(--gnome-syntax-string); }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) :is(.hljs-number, .hljs-symbol, .hljs-bullet) { color: var(--gnome-syntax-number); }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) :is(.hljs-title, .hljs-section, .hljs-built_in, .hljs-name, .hljs-selector-id, .hljs-selector-class) { color: var(--gnome-syntax-title); }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) :is(.hljs-variable, .hljs-template-variable, .hljs-attr, .hljs-attribute, .hljs-params) { color: var(--gnome-syntax-variable); }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) :is(.hljs-meta, .hljs-tag) { color: var(--gnome-syntax-meta); }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) .hljs-addition { color: var(--gnome-syntax-string); background: var(--gnome-syntax-addition-background); }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre:not(:where(.note-list-widget *, .layout-table *)) .hljs-deletion { color: var(--gnome-syntax-deletion); background: var(--gnome-syntax-deletion-background); }
+
+
+/* Preserve table semantics, authored widths/colors, and editor widget outlines. */
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) figure.table:not(:where(.note-list-widget *, .layout-table, :has(> table.layout-table))) {
+    max-width: 100%;
+    margin-block: 1.15em;
+    --ck-color-table-focused-cell-background: var(--gnome-table-focus);
+    --ck-color-selector-focused-cell-background: var(--gnome-table-focus);
+    --ck-table-selected-cell-background: var(--gnome-table-selection);
+    --ck-color-selector-cell-selection: var(--gnome-table-selection);
+    --ck-color-focus-border: var(--input-focus-outline-color);
+}
+
+/* Editing figures stay unclipped so column resize and widget handles remain usable. */
+.note-detail-readonly-text figure.table:not(:where(.note-list-widget *, :has(> table.layout-table))) {
+    overflow-x: auto;
+}
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) {
+    width: 100%;
+    border: 1px solid var(--gnome-table-border);
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 6px;
+    background: var(--gnome-table-background);
+    color: var(--main-text-color);
+    font-size: 0.95em;
+    line-height: 1.6;
+    font-variant-numeric: tabular-nums;
+    text-indent: 0;
+}
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > :is(thead, tbody, tfoot) > tr > :is(td, th) {
+    padding: 0.65em 0.9em;
+    border: 0;
+    border-block-end: 1px solid var(--gnome-table-divider);
+    border-inline-end: 1px solid var(--gnome-table-divider);
+    color: var(--main-text-color);
+    background-color: var(--gnome-table-background);
+    box-shadow: none;
+    vertical-align: top;
+    overflow-wrap: anywhere;
+}
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > tbody > tr:nth-child(even) > td { background-color: var(--gnome-table-stripe); }
+
+/* Only semantic headers receive header styling; a plain first row remains data. */
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > :is(thead, tbody, tfoot) > tr > th {
+    background-color: var(--gnome-table-header-background);
+    color: var(--gnome-table-header-text);
+    font-weight: 600;
+    border-block-end-color: var(--gnome-table-border);
+}
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > :is(thead, tbody, tfoot) > tr > :last-child { border-inline-end-width: 0; }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > :last-child > tr:last-child > :is(td, th) { border-block-end-width: 0; }
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) :is(td, th):not(:where(.note-list-widget *, .layout-table *)) > p:first-child { margin-block-start: 0; }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) :is(td, th):not(:where(.note-list-widget *, .layout-table *)) > p:last-child { margin-block-end: 0; }
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) figure.table:not(:where(.note-list-widget *, :has(> table.layout-table))) > figcaption {
+    padding: 0.6em 0.85em;
+    background: transparent;
+    color: var(--gnome-caption-text);
+    font-size: 0.85em;
+    line-height: 1.6;
+    text-align: start;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > tbody > tr:hover > td:not(.ck-editor__editable_selected):not(.ck-editor__nested-editable_focused):not(:focus) {
+        background-color: var(--gnome-table-hover);
+    }
+}
+
+/* Keep the active cell distinct from row hover and the multi-cell selection overlay. */
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > :is(thead, tbody, tfoot) > tr > :is(td, th):not(.ck-editor__editable_selected):is(.ck-editor__nested-editable_focused, :focus) {
+    background-color: var(--gnome-table-focus);
+    outline: 2px solid var(--input-focus-outline-color);
+    outline-offset: -2px;
+}
+
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > :first-child > tr:first-child > :first-child { border-start-start-radius: 5px; }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > :first-child > tr:first-child > :last-child { border-start-end-radius: 5px; }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > :last-child > tr:last-child > :first-child { border-end-start-radius: 5px; }
+:is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > :last-child > tr:last-child > :last-child { border-end-end-radius: 5px; }
+
+/* Variables also let code blocks provide their own scrollbar colors. */
+::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-hover-color);
+}
+
+@supports (-moz-appearance: none) {
+    * { scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-background-color); }
+}
+
+:is(.note-detail-editable-text, .note-detail-readonly-text) ::selection {
+    color: var(--gnome-selection-text);
+    background-color: var(--gnome-selection-background);
+}
+
+/* Next uses command-button variables locally, including for primary actions. */
+body button.btn.btn-primary,
+body button.ck.ck-button.ck-button-save {
+    --cmd-button-background-color: var(--primary-button-background-color);
+    --cmd-button-text-color: var(--primary-button-text-color);
+    --cmd-button-hover-background-color: #d2d7a2;
+    --cmd-button-hover-text-color: var(--primary-button-text-color);
+    --cmd-button-icon-color: var(--primary-button-text-color);
+}
+
+/* Warm titles and restrained tabs; preserve workspace-color markers and note colors. */
+.note-title-widget input.note-title {
+    color: var(--main-text-color);
+}
+
+:root body div.tab-row-widget div.note-tab div.note-tab-wrapper {
+    border-radius: 4px;
+}
+
+:root body.layout-horizontal div.tab-row-widget div.note-tab div.note-tab-wrapper {
+    border-end-start-radius: 0;
+    border-end-end-radius: 0;
+}
+
+/* Compact application chrome; leave content width under Trilium's control. */
+#toast-container {
+    right: 10px !important;
+    bottom: 10px !important;
+    top: auto !important;
+    width: auto !important;
+}
+
+#launcher-pane.vertical {
+    align-items: center;
+    border-inline-end: 0;
+}
+
+#launcher-pane.vertical :is(.launcher-button, .dropdown) {
+    width: 37px !important;
+    height: 37px !important;
+    margin-inline: 1px;
+}
+
+#launcher-pane.vertical #launcher-container { width: 100%; }
+
+#launcher-pane.vertical .icon-action.global-menu-button {
+    padding-top: 0;
+    margin-top: 3px;
+    font-size: 1em;
+}
+
+.tab-row-widget .note-tab .note-tab-title {
+    text-overflow: ellipsis;
+}
+
+.note-detail pre.hljs { box-shadow: none; }
+.ck.ck-editor__editable .ck-code_selected { background-color: var(--gnome-selection-background); }
+.note-detail :is(.attachment-content-wrapper pre code, .ck-mermaid__editing-view) {
+    padding-block: 0.5em;
+}
+
+.ck-content hr { height: 1px; }
+.ck-content .page-break::after { border-top: 2px dashed var(--main-border-color); }
+.ck-math-tex { user-select: all; }
+.workspace-notes .workspace-icon { font-size: 200%; }
+body.zen .title-row { background: var(--left-pane-background-color); }
+
+/* Respect the platform preference rather than turning off all image feedback. */
+@media (prefers-reduced-motion: reduce) {
+    #launcher-pane .sync-status-disconnected-with-changes,
+    .bx-edit-alt.bx-tada,
+    .bx-edit-alt.bx-lg,
+    .dropdown-menu {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+@media print {
+    body {
+        color-scheme: light;
+        --main-text-color: #000 !important;
+        --main-background-color: #fff !important;
+        --detail-font-size: var(--print-font-size, 11pt);
+        color: #000 !important;
+        background: #fff !important;
+    }
+
+    :is(.note-detail-editable-text, .note-detail-readonly-text),
+    :is(.note-detail-editable-text, .note-detail-readonly-text) .ck-content {
+        color: #000 !important;
+        background: transparent !important;
+    }
+
+    :is(.note-detail-editable-text, .note-detail-readonly-text) :is(h1, h2, h3, h4, h5, h6):not(:where(.note-list-widget *, .note-book-header, .include-note-title)) {
+        color: #000 !important;
+        background: transparent !important;
+        border: 0 !important;
+        border-radius: 0;
+        padding: 0;
+        box-shadow: none;
+        text-shadow: none;
+        break-after: avoid;
+    }
+
+    :is(.note-detail-editable-text, .note-detail-readonly-text) blockquote {
+        background: transparent;
+        border-inline-start-color: #777 !important;
+    }
+
+    :is(.note-detail-editable-text, .note-detail-readonly-text) a[href] {
+        color: #000;
+    }
+
+
+    /* Print without colored paper, clipped code or split table rows. */
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre:has(> code):not(:where(.note-list-widget *, .layout-table *)) {
+        background: #fff !important;
+        color: #000 !important;
+        border: 1px solid #999;
+        box-shadow: none;
+    }
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre > code:not(:where(.note-list-widget *, .layout-table *)) {
+        padding: 0.8em !important;
+        white-space: pre-wrap !important;
+        overflow-wrap: anywhere !important;
+        overflow: visible;
+    }
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre[data-language]::after,
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre > button.copy-button,
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) .ck-code-block__type-around,
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) .ck-widget__selection-handle,
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) .ck-widget__type-around { display: none; }
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) pre [class*='hljs-'] { color: #000 !important; background: transparent !important; }
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) :not(pre) > code:not(:where(pre *, .note-list-widget *)) { color: #000 !important; background: transparent !important; }
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) figure.table { overflow: visible; }
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) { border-color: #999; background: #fff; }
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > :is(thead, tbody, tfoot) > tr > :is(td, th) {
+        color: #000 !important;
+        background: transparent !important;
+        border-color: #bbb;
+        outline: none !important;
+    }
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) :is(figure.table > table, table):not(.layout-table):not(:where(.note-list-widget *, .layout-table *)) > :is(thead, tbody, tfoot) > tr { break-inside: avoid; }
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) figure.table > figcaption { color: #333; }
+
+    :is(.note-detail-editable-text .ck-content, .note-detail-readonly-text .ck-content, .note-detail-readonly-text) .ck-editor__editable_selected::after { display: none; }
+
+    #left-pane.component { background-image: none; }
+}
