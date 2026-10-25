@@ -12,7 +12,7 @@
 | --- | --- |
 | `blue-theme-light.css` | `#appTheme=blue-theme-light #appThemeBase=next-light` |
 | `blue-theme-dark.css` | `#appTheme=blue-theme-dark #appThemeBase=next-dark` |
-| `gnome.css` | `#appTheme=gnome #appThemeBase=next-dark` |
+| `gnome-theme-dark.css` | `#appTheme=gnome #appThemeBase=next-dark` |
 
 1. 在 Trilium 创建 CSS 类型的代码笔记，粘贴对应文件的完整内容。
 2. 添加上表中的属性，在选项的外观设置中选择主题。
@@ -39,10 +39,10 @@
 - 同时适配纵向 / 横向工具栏、搜索、输入框、主要按钮、菜单、弹窗、提示及 CKEditor 工具栏。主操作按钮使用橄榄色；错误、危险操作和警告保留语义颜色。
 - 文本笔记代码块的默认文字对比度为 **11.07:1**，语法颜色最低为 **7.61:1**；表头为 **7.44:1**，浮层上的次要文字为 **5.18:1**。低对比分隔线仅用于装饰，选中和焦点另有清晰标记。
 - 长代码在块内横向滚动，开启代码自动换行后随设置换行；保留原生复制按钮、表格调整控件及手动指定的单元格样式。
-- **独立代码笔记**使用 Trilium 单独配置的代码编辑器主题。`gnome.css` 不接管 CodeMirror 的独立主题；本主题的语法配色用于文本笔记中的代码块。
+- **独立代码笔记**使用 Trilium 单独配置的代码编辑器主题。`gnome-theme-dark.css` 不接管 CodeMirror 的独立主题；本主题的语法配色用于文本笔记中的代码块。
 - 打印转换为白底黑字，取消彩色标题、代码底色及单元格选区，展开长代码。图片保持原样；需要白底图表自动适配时，可使用下方可选脚本，gnome 的暗色标记与其兼容。
 
-调整入口位于 `gnome.css` 文件开头：`--gnome-ink` 为正文底色，`--gnome-text` 为正文颜色，`--gnome-olive` 为强调色；字号、`--gnome-reading-line-height` 与 `--gnome-paragraph-indent` 位于后面的排版变量区。无需修改其他主题文件。
+调整入口位于 `gnome-theme-dark.css` 文件开头：`--gnome-ink` 为正文底色，`--gnome-text` 为正文颜色，`--gnome-olive` 为强调色；字号、`--gnome-reading-line-height` 与 `--gnome-paragraph-indent` 位于后面的排版变量区。无需修改其他主题文件。
 
 验证使用本机 0.106.1 的实际基础样式，在隔离 Chromium 页面覆盖编辑 / 只读、纵向 / 横向布局、340px 窄内容区、代码自动换行及打印样式，共 10 组组合、350 项样式断言；另检查 CSS 语法、变量完整性与配色对比度，并目视检查桌面和窄内容区渲染。打印验证通过应用实际的 `@media print` 规则检查计算样式，未验证实体分页；隔离页面不等同于完整 Trilium / CKEditor 操作集成测试。
 
